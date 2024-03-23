@@ -4,6 +4,11 @@
       <%= image_tag image_path("logo.png") %> AssetMint
     <% end %>
 
+    <!-- Show production environment indicator -->
+    <% if Rails.env.production? %>
+      <span class="badge bg-danger">Production</span>
+    <% end %>
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
