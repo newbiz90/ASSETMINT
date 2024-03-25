@@ -10,18 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_25_115707) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_25_115257) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "assets", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "ticker_id", null: false
-    t.bigint "user_id", null: false
-    t.index ["ticker_id"], name: "index_assets_on_ticker_id"
-    t.index ["user_id"], name: "index_assets_on_user_id"
-  end
 
   create_table "news_snippets", force: :cascade do |t|
     t.text "content"
@@ -31,38 +22,31 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_25_115707) do
     t.index ["ticker_id"], name: "index_news_snippets_on_ticker_id"
   end
 
-  create_table "subscriptions", force: :cascade do |t|
-    t.string "subscribable_type", null: false
-    t.bigint "subscribable_id", null: false
-    t.bigint "topic_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["subscribable_type", "subscribable_id"], name: "index_subscriptions_on_subscribable"
-    t.index ["topic_id"], name: "index_subscriptions_on_topic_id"
-  end
-
   create_table "tickers", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "topics", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "transactions", force: :cascade do |t|
-    t.bigint "asset_id", null: false
+    t.bigint "user_tickers_id", null: false
     t.string "flow"
     t.date "txndate"
     t.decimal "txnprice"
-    t.integer "qty"
+    t.decimal "qty"
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["asset_id"], name: "index_transactions_on_asset_id"
+    t.index ["user_tickers_id"], name: "index_transactions_on_user_tickers_id"
+  end
+
+  create_table "user_tickers", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "ticker_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["ticker_id"], name: "index_user_tickers_on_ticker_id"
+    t.index ["user_id"], name: "index_user_tickers_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -77,9 +61,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_25_115707) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "assets", "tickers"
-  add_foreign_key "assets", "users"
   add_foreign_key "news_snippets", "tickers"
-  add_foreign_key "subscriptions", "topics"
-  add_foreign_key "transactions", "assets"
+  add_foreign_key "transactions", "user_tickers", column: "user_tickers_id"
+  add_foreign_key "user_tickers", "tickers"
+  add_foreign_key "user_tickers", "users"
 end
