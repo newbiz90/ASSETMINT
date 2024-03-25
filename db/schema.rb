@@ -41,10 +41,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_25_115257) do
   end
 
   create_table "user_tickers", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "ticker_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "ticker_id", null: false
-    t.bigint "user_id", null: false
     t.index ["ticker_id"], name: "index_user_tickers_on_ticker_id"
     t.index ["user_id"], name: "index_user_tickers_on_user_id"
   end
