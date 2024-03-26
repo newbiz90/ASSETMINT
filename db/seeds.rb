@@ -22,13 +22,15 @@ puts "UserTicker 1: #{user_ticker1.inspect}"
 puts "UserTicker 2: #{user_ticker2.inspect}"
 
 # Create a transaction for the first user_ticker
-transaction1 = Transaction.new(user_tickers_id: 1, flow: 'Buy', txndate: Date.today, txnprice: 100.00, qty: 10, comment: 'Bought 10 shares of AAPL')
+transaction1 = Transaction.new(user_ticker: user_ticker1, flow: 'Buy', txndate: Date.today, txnprice: 100.00, qty: 10, comment: 'Bought 10 shares of AAPL')
 puts "Transaction 1 valid?: #{transaction1.valid?}"
 puts "Transaction 1 errors: #{transaction1.errors.full_messages}"
+transaction1.save
 
 # Create a transaction for the second user_ticker
-transaction2 = Transaction.new(user_tickers_id: 2, flow: 'Sell', txndate: Date.today, txnprice: 110.00, qty: 5, comment: 'Sold 5 shares of GOOGL')
+transaction2 = Transaction.new(user_ticker: user_ticker2, flow: 'Sell', txndate: Date.today, txnprice: 110.00, qty: 5, comment: 'Sold 5 shares of GOOGL')
 puts "Transaction 2 valid?: #{transaction2.valid?}"
 puts "Transaction 2 errors: #{transaction2.errors.full_messages}"
+transaction2.save
 
 puts "Seed Completed!"
