@@ -12,6 +12,17 @@ user_ticker1 = UserTicker.create(user: user1, ticker: ticker1)
 user_ticker2 = UserTicker.create(user: user2, ticker: ticker2)
 # You can associate users with tickers in any way you want, depending on your application's logic
 
+# Seed data for subscriptions
+subscription1 = Subscription.new(subscribable: user1, user: user2)
+puts "Subscription 1 valid?: #{subscription1.valid?}"
+puts "Subscription 1 errors: #{subscription1.errors.full_messages}"
+subscription1.save
+
+subscription2 = Subscription.new(subscribable: user2, user_ticker: user_ticker1)
+puts "Subscription 2 valid?: #{subscription2.valid?}"
+puts "Subscription 2 errors: #{subscription2.errors.full_messages}"
+subscription2.save
+
 # Seed data for news_snippets
 NewsSnippet.create(content: 'News snippet for AAPL', ticker: ticker1)
 NewsSnippet.create(content: 'News snippet for GOOGL', ticker: ticker2)
