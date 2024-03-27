@@ -2,8 +2,6 @@
 <br>
 <% @alltxn.each do |txn| %>
   <h4>Transaction No: <%= pp txn.id %></h4>
-  <% ticker_id = txn.user_tickers_id %>
-  <% txn_ticker = @ticker.find(ticker_id) %>
-  <p><%= txn_ticker %> x <%= txn.qty %> (<%= txn.flow %>)</p>
-
+  <% txn_ticker = @ticker.find(txn.user_tickers_id) %>
+  <p><%= txn_ticker.name %> x <%= txn.qty %>qty (<%= txn.flow %>)</p>
 <% end %>
