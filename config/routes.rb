@@ -27,6 +27,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   resources :users, only: [:show]
+  devise_for :users
+
   get 'dashboard', to: 'dashboard#index'
 
 

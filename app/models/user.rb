@@ -3,11 +3,15 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  # Subscriptions as a subscribable entity
   has_many :subscriptions, as: :subscribable
 
-  has_many :followers_subscriptions, foreign_key: :subscribable_id, class_name: "Subscription"
-  has_many :followers, through: :followers_subscriptions, source: :user
+  # Follower associations
+  has_many :follower_subscriptions, foreign_key: :subscribable_id, class_name: "Subscription"
+  has_many :followers, through: :follower_subscriptions, source: :user
 
+  # Following associations
   has_many :following_subscriptions, foreign_key: :user_id, class_name: "Subscription"
   has_many :following, through: :following_subscriptions, source: :subscribable, source_type: 'User'
 end
