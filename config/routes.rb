@@ -1,13 +1,26 @@
 Rails.application.routes.draw do
-  resources :transactions
-  devise_for :users
+  # Routes for users
+  resources :users do
+    # Nested routes for subscriptions associated with users
+    resources :subscriptions, only: [:index, :create, :destroy]
+
+    # Nested routes for transactions associated with users
+    resources :transactions, only: [:index, :create, :update, :destroy]
+  end
+
+  # Routes for tickers
+  resources :tickers do
+    # Nested routes for news snippets associated with tickers
+    resources :news_snippets, only: [:index, :create, :destroy]
+  end
+
+  # Routes for user_tickers
+  resources :user_tickers, only: [:index, :create, :destroy]
+
+  # Define root path
   root to: "pages#home"
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
-
-  # Defines the root path route ("/")
-  # root "posts#index"
 end
