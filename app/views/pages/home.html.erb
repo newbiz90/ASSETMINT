@@ -1,4 +1,11 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
-<h1>Hello from Chloe</h1>
-<h1>Ohaiyo from Ericsson</h1>
+
+<br>
+<h1>AssetMint</h1>
+
+<!-- Display user's follower/following counts -->
+<%= render "follower_count", followers_count: @followers_count %>
+<%= render "following_count", following_count: @following_count %>
+
+<!-- Your existing content -->
