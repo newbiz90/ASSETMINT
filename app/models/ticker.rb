@@ -4,4 +4,5 @@ class Ticker < ApplicationRecord
   has_many :news_snippets
 
   # Add any validations or methods specific to the Ticker model here
+  validates :name, presence: true, uniqueness: true
 end
