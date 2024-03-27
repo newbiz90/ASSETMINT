@@ -1,6 +1,9 @@
 # Seed data for tickers
 ticker1 = Ticker.create(name: 'AAPL')
 ticker2 = Ticker.create(name: 'GOOGL')
+ticker3 = Ticker.create(name: 'TSLA')
+ticker4 = Ticker.create(name: 'HSBC')
+ticker5 = Ticker.create(name: 'AMZN')
 
 # Seed data for users
 user1 = User.create(email: 'user1@example.com', password: 'password1', password_confirmation: 'password1')
