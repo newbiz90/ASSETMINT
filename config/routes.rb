@@ -2,6 +2,15 @@ Rails.application.routes.draw do
   # Routes for Devise authentication
   devise_for :users
 
+  # Routes for users
+  resources :users do
+    # Nested routes for subscriptions associated with users
+    resources :subscriptions, only: [:index, :create, :destroy]
+
+    # Nested routes for transactions associated with users
+    resources :transactions, only: [:index, :create, :update, :destroy]
+  end
+
   # Routes for tickers
   resources :tickers do
     # Nested routes for news snippets associated with tickers
