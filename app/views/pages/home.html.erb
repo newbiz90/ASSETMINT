@@ -1,7 +1,9 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
 
-<%= link_to 'View Your Transactions', user_transactions_path(current_user) %>
+<% if user_signed_in? %>
+  <%= link_to 'View Your Transactions', user_transactions_path(current_user) %>
+<% end %>
 
 <br>
 
