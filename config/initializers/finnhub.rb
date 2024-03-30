@@ -1,4 +1,4 @@
 
 FinnhubRuby.configure do |config|
-  config.api_key['api_key'] = Rails.application.credentials.dig(:finnhub, :api_key)
+  config.api_key['api_key'] = ENV["FINN_API_KEY"]
 end
