@@ -54,7 +54,7 @@ puts "Transaction 3 errors: #{transaction3.errors.full_messages}"
 transaction3.save
 
 # Create a transaction for the first user_ticker
-transaction4 = Transaction.new(user_ticker: user_ticker1, flow: 'Buy', txndate: Date.today, txnprice: 100.00, qty: 10, comment: 'Bought 10 shares of AAPL')
+transaction4 = Transaction.new(user_ticker: user_ticker1, flow: 'Sell', txndate: Date.today, txnprice: 90.00, qty: 90, comment: 'Sold 90 shares of AAPL')
 puts "Transaction 4 valid?: #{transaction4.valid?}"
 puts "Transaction 4 errors: #{transaction4.errors.full_messages}"
 transaction4.save
