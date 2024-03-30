@@ -1,0 +1,47 @@
+// Front End Color Codes
+// $table-header-bg: #BBEDE1;
+// $table-light-green: #E6FAF5;
+// $header-color: #4B7F73;
+// $main-bg: #F7FDF7;
+// $side-bar-bg: #F1FFFC;
+
+.container {
+  background-color: #F7FDF7;
+  padding-top: 10px;
+}
+
+.txn-table {
+  // border: 2px solid black;
+  margin-top: 20px;
+}
+
+.table-header {
+  display: flex;
+  background-color: #BBEDE1;
+}
+
+.transaction {
+  display: flex;
+}
+
+.column {
+  flex: 1;
+  // border: 1px solid #000;
+  text-align: center;
+}
+
+
+#table-title {
+  color: #4B7F73;
+}
+
+.odd-transaction {
+  display: flex;
+  background-color: white;
+}
+
+.even-transaction {
+  display: flex;
+  background-color: #E6FAF5;
+
+}
