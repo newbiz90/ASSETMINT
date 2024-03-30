@@ -29,9 +29,6 @@ gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
 gem "redis", ">= 4.0.1"
 
-# Add the Finnhub Ruby gem
-gem 'finnhub_ruby'
-
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
@@ -52,6 +49,8 @@ gem "autoprefixer-rails"
 gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
+
+gem 'rest-client'
 
 # Added by Matthew Oh
 gem "devise"
