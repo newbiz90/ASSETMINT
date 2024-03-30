@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   # Define root path
   root to: "pages#home"
 
+  # Custom route for landing_page
+  get '/landing_page', to: 'pages#landing'
+
   # Routes for Devise authentication
   devise_for :users
 
