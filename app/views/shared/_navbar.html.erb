@@ -1,3 +1,68 @@
+  <nav id='nav' <%= user_signed_in? ? "data-turbo-permanent" : "" %> data-controller="navigation"
+       style="
+        padding: 1rem;
+        display: flex; top: 0; position: fixed;
+        z-index: 1000; width: 100vw; background: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+       ">
+    <div class="flex align-middle pl-4">
+      <%= link_to root_path do %>
+        <%= image_tag "logo.png", style: "height: 2rem; width: auto; margin: auto; padding-right: 1rem;" %>
+      <% end %>
+    </div>
+
+    <% if user_signed_in? %>
+      <div id='zh_nav'
+          style="
+            padding-x: 1rem;
+            font-size: 0.875rem;
+            background: white;
+            display: flex;
+            justify-content: start;
+            border-radius: 10px;
+            z-index: -1;
+          " >
+        <div
+          id="hover_pill"
+          style="
+            z-index: -2;
+            position: absolute;
+            opacity: 0;
+            border-radius: 10px;
+            background: #BBEDE1;
+            transition-property: width,transform,opacity;
+            transition-timing-function: cubic-bezier(.4,0,.2,1);
+          "></div>
+          <%= link_to 'dashboard', root_path, style: "padding: 0.5rem; color: #{ current_page?(root_path) ? "#4B7F73" : "#b3b3b3" }" %>
+          <%= link_to 'portfolio', "", style: "padding: 0.5rem; color: #{ current_page?("aa") ? "#4B7F73" : "#b3b3b3" }"  %>
+          <%= link_to 'watchlist', "", style: "padding: 0.5rem; color: #{ current_page?("aa") ? "#4B7F73" : "#b3b3b3" }" %>
+          <%= link_to 'community', "", style: "padding: 0.5rem; color: #{ current_page?("aa") ? "#4B7F73" : "#b3b3b3" }"  %>
+        </div>
+      </div>
+    <% end %>
+
+
+
+  <% if user_signed_in? %>
+    <div style="position: fixed; right: 2rem;">
+      <div style="padding-top: 0.5rem;">
+        <%= link_to "👋", destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to log out?" }, style: "text-decoration: none;" %>
+      </div>
+    </div>
+  <% else %>
+   <div style="position: fixed; right: 2rem;">
+      <div style="">
+        <%= link_to "Login", new_user_session_path, class: "btn btn-success", style: "text-decoration: none;" %>
+      </div>
+    </div>
+  <% end %>
+  </nav>
+
+
+<%
+=begin%>
+
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
     <%= link_to root_path, class: "navbar-brand" do %>
@@ -26,7 +91,7 @@
             <%= link_to "Dashboard", "#", class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= link_to "Portfolio", "#", class: "nav-link" %>
+            <%= link_to "Portfolio", portfolio_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
             <%= link_to "Watchlist", "#", class: "nav-link" %>
@@ -53,3 +118,5 @@
     </div>
   </div>
 </div>
+<%
+=end%>
