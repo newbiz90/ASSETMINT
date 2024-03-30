@@ -1,0 +1,19 @@
+<h1>Portfolio</h1>
+
+<div class="row justify-content-center">
+  <div class="col-md-7">
+    <%= form_tag(search_portfolio_path, method: :get, class: "d-flex mb-3") do %>
+      <div class="input-group">
+        <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Search..." %>
+        <button type="submit" class="btn btn-primary">Search</button>
+      </div>
+    <% end %>
+
+    <% @users.each do |user| %>
+      <div class="user mb-2">
+        <%= user.email %> <!-- Or whatever attribute you want to display -->
+        <%= link_to "Follow", follow_user_path(user), method: :post, remote: true, class: "btn btn-sm btn-primary ml-2" %>
+      </div>
+    <% end %>
+  </div>
+</div>

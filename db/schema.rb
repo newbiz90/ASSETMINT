@@ -38,6 +38,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_26_030528) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_tickers_on_name"
   end
 
   create_table "transactions", force: :cascade do |t|
