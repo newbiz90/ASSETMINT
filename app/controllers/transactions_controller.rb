@@ -5,7 +5,6 @@ class TransactionsController < ApplicationController
     @alltickers = Ticker.all
     @usertickers = UserTicker.all
     @txn_count = 0
-    # raise
   end
 
 end
