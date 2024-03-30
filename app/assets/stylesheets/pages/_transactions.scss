@@ -11,13 +11,17 @@
 }
 
 .txn-table {
-  // border: 2px solid black;
+  border-bottom: 2px solid #4B7F73;
   margin-top: 20px;
+  border-radius: 0rem;
 }
 
 .table-header {
   display: flex;
   background-color: #BBEDE1;
+  border-top: 2px solid #4B7F73;
+  // border-left: 2px solid #4B7F73;
+  // border-right: 2px solid #4B7F73;
 }
 
 .transaction {
@@ -28,6 +32,8 @@
   width: calc(100% / 7);
   // border: 1px solid #000;
   text-align: center;
+  border-left: 2px solid #4B7F73;
+  border-right: 2px solid #4B7F73;
 
   input {
     width: 100%;

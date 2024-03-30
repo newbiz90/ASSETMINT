@@ -13,6 +13,8 @@ user2 = User.create(email: 'user2@example.com', password: 'password2', password_
 # Seed data for user_tickers (associating users with tickers)
 user_ticker1 = UserTicker.create(user: user1, ticker: ticker1)
 user_ticker2 = UserTicker.create(user: user2, ticker: ticker2)
+user_ticker3 = UserTicker.create(user: user2, ticker: ticker3)
+user_ticker4 = UserTicker.create(user: user2, ticker: ticker4)
 # You can associate users with tickers in any way you want, depending on your application's logic
 
 # Seed data for subscriptions
@@ -58,5 +60,41 @@ transaction4 = Transaction.new(user_ticker: user_ticker1, flow: 'Sell', txndate:
 puts "Transaction 4 valid?: #{transaction4.valid?}"
 puts "Transaction 4 errors: #{transaction4.errors.full_messages}"
 transaction4.save
+
+# Create a transaction for the second user_ticker
+transaction5 = Transaction.new(user_ticker: user_ticker3, flow: 'Sell', txndate: Date.today, txnprice: 110.00, qty: 5, comment: 'Sold 5 shares of X')
+puts "Transaction 5 valid?: #{transaction2.valid?}"
+puts "Transaction 5 errors: #{transaction2.errors.full_messages}"
+transaction5.save
+
+# Create a transaction for the second user_ticker
+transaction6 = Transaction.new(user_ticker: user_ticker4, flow: 'Sell', txndate: Date.today, txnprice: 20.00, qty: 7, comment: 'Sold 7 shares of GOOGL')
+puts "Transaction 6 valid?: #{transaction2.valid?}"
+puts "Transaction 6 errors: #{transaction2.errors.full_messages}"
+transaction6.save
+
+# Create a transaction for the second user_ticker
+transaction7 = Transaction.new(user_ticker: user_ticker4, flow: 'Buy', txndate: Date.today, txnprice: 63.00, qty: 11, comment: 'Bought 11 shares of A')
+puts "Transaction 7 valid?: #{transaction2.valid?}"
+puts "Transaction 7 errors: #{transaction2.errors.full_messages}"
+transaction7.save
+
+# Create a transaction for the second user_ticker
+transaction8 = Transaction.new(user_ticker: user_ticker2, flow: 'Buy', txndate: Date.today, txnprice: 73.00, qty: 5, comment: 'Bought 5 shares of GOOGL')
+puts "Transaction 8 valid?: #{transaction8.valid?}"
+puts "Transaction 8 errors: #{transaction8.errors.full_messages}"
+transaction8.save
+
+# Create a transaction for the second user_ticker
+transaction9 = Transaction.new(user_ticker: user_ticker3, flow: 'Sell', txndate: Date.today, txnprice: 110.00, qty: 5, comment: 'Sold 5 shares of GOOGL')
+puts "Transaction 9 valid?: #{transaction9.valid?}"
+puts "Transaction 9 errors: #{transaction9.errors.full_messages}"
+transaction9.save
+
+# Create a transaction for the second user_ticker
+transaction10 = Transaction.new(user_ticker: user_ticker4, flow: 'Buy', txndate: Date.today, txnprice: 17.00, qty: 23, comment: 'Bought 23 shares of P')
+puts "Transaction 10 valid?: #{transaction10.valid?}"
+puts "Transaction 10 errors: #{transaction10.errors.full_messages}"
+transaction10.save
 
 puts "Seed Completed!"
