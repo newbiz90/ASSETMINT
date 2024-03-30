@@ -22,7 +22,7 @@
                 <%= form.label :ticker_id %>
                 <%= form.text_field :ticker_id, id: 'ticker-autocomplete', class: 'form-control', list: 'tickers-list' %>
                 <datalist id="tickers-list">
-                  <% @tickers.each do |ticker| %>
+                  <% @alltickers.each do |ticker| %>
                     <option value="<%= ticker.name %>">
                   <% end %>
                 </datalist>

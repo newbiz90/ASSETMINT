@@ -8,7 +8,7 @@ class TransactionsController < ApplicationController
 
   def new
     @transaction = Transaction.new
-    @tickers = Ticker.all
+    @alltickers = Ticker.all
   end
 
   def create
