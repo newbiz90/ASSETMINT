@@ -1,0 +1,35 @@
+<div class="container">
+  <h3 id="table-title">All User<%=params[:id]%>'s Transactions</h3>
+  <div class="txn-table">
+    <div class="table-header">
+      <div class="column"><h6>Flow</h6></div>
+      <div class="column"><h6>Ticker</h6></div>
+      <div class="column"><h6>Entry Date</h6></div>
+      <div class="column"><h6>Entry Price</h6></div>
+      <div class="column"><h6>Quantity</h6></div>
+      <div class="column"><h6>Current Price</h6></div>
+      <div class="column"><h6>P/L</h6></div>
+    </div>
+
+    <div>
+      <% @usertxns.each do |txn| %>
+        <% @txn_count += 1 %>
+          <div style="position: relative;" class="transaction <%= @txn_count.odd? ? 'odd-transaction' : 'even-transaction' %>">
+            <% if current_user != @user %>
+              <span style="position: absolute; right: -4rem;"><i style="color: red;" class="fa-regular fa-heart"></i></span>
+            <% end %>
+            <% usertxnticker = @usertickers.find(txn.user_tickers_id) %>
+            <% ticker = @alltickers.find(usertxnticker.ticker_id) %>
+            <div class="column"><h6><%= txn.flow %></h6></div>
+            <div class="column"><h6><%= pp ticker.name %></h6></div>
+            <%# <%raise%>
+            <div class="column"><h6><%= txn.txndate %></h6></div>
+            <div class="column"><h6><%= txn.txnprice %></h6></div>
+            <div class="column"><h6><%= txn.qty %></h6></div>
+            <div class="column"><h6>123</h6></div>
+            <div class="column"><h6>123</h6></div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
