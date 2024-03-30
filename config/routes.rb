@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :subscriptions, only: [:index, :create, :destroy]
 
     # Nested routes for transactions associated with users
-    resources :transactions, only: [:index, :create, :update, :destroy]
+    resources :transactions, only: [:index, :create, :new, :update, :destroy]
   end
 
   # Routes for tickers
