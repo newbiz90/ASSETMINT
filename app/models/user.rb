@@ -14,4 +14,6 @@ class User < ApplicationRecord
   # Following associations
   has_many :following_subscriptions, foreign_key: :user_id, class_name: "Subscription"
   has_many :following, through: :following_subscriptions, source: :subscribable, source_type: 'User'
+  has_many :user_tickers
+  has_many :tickers, through: :user_tickers
 end
