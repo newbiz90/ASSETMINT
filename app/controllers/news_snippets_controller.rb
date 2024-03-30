@@ -7,7 +7,7 @@ class NewsSnippetsController < ApplicationController
 
     # Fetch market news from Finnhub
     begin
-      # @finnhub_news = finnhub_client.market_news('forex', {min_id: 0})
+      # @finnhub_news = FinnhubApiClient.new(finnhub_client).get_news
       @finnhub_news = mock_finnhub
     rescue => e
       @finnhub_news = [] # In case of an API error, ensure @finnhub_news is an array to avoid errors in the view.
