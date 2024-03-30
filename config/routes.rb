@@ -1,12 +1,6 @@
 Rails.application.routes.draw do
-  # Routes for users
-  resources :users do
-    # Nested routes for subscriptions associated with users
-    resources :subscriptions, only: [:index, :create, :destroy]
-
-    # Nested routes for transactions associated with users
-    resources :transactions, only: [:index, :create, :update, :destroy]
-  end
+  # Routes for Devise authentication
+  devise_for :users
 
   # Routes for tickers
   resources :tickers do
@@ -24,12 +18,6 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Defines the root path route ("/")
-  # root "posts#index"
-  resources :users, only: [:show]
-  devise_for :users
-
+  # Routes for dashboard
   get 'dashboard', to: 'dashboard#index'
-
-
 end
