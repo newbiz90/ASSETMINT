@@ -1,18 +1,20 @@
-// Graphical variables
+/* Graphical variables */
 @import "config/fonts";
 @import "config/colors";
 @import "config/bootstrap_variables";
 
-// External libraries
+/* External libraries */
 @import "bootstrap";
 @import "font-awesome";
 
-// Your CSS partials
+/* Your CSS partials */
 @import "components/index";
 @import "pages/index";
+@import "pages/transactions";
 
-/* app/assets/stylesheets/custom.css */
+/* Custom CSS */
 
+/* Styles for news feed */
 .news-feed-header {
   font-size: 16px;
   color: #4B7F73; /* Example color: Bootstrap primary blue */
@@ -32,7 +34,7 @@
   margin-top: 20px; /* Adds additional space above sub-headers, if needed */
 }
 
-/* Inside app/assets/stylesheets/application.css or custom.css */
+/* Styles for news feed column */
 .news-feed-column {
   border: 1px solid #ccc; /* Adds a light grey border */
   padding: 10px; /* Adds some padding inside the box */
@@ -42,7 +44,13 @@
   border-radius: 5px;
 }
 
+/* Styles for navbar */
 .navbar-lewagon {
   border-bottom: 2px solid #eee; /* Adds a bottom border to the navbar */
   margin-bottom: 2px;
+}
+
+/* Body styles */
+body {
+  background-color: #F7FDF7; /* Set the background color of the body */
 }

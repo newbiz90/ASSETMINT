@@ -1,55 +1,63 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <div class="container-fluid">
-    <%= link_to root_path, class: "navbar-brand" do %>
-      <%= image_tag image_path("logo.png") %> AssetMint
+<nav id='nav' <%= user_signed_in? ? "data-turbo-permanent" : "" %> data-controller="navigation"
+     style="
+      padding: 1rem;
+      display: flex; top: 0; position: fixed;
+      z-index: 1000; width: 100vw; background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+     ">
+  <div class="flex align-middle pl-4">
+    <%= link_to root_path do %>
+      <%= image_tag "logo.png", style: "height: 2rem; width: auto; margin: auto; padding-right: 1rem;" %>
     <% end %>
-
-      <!-- Show environment indicator -->
-      <% if Rails.env.production? %>
-        <div class="col-auto">
-          <span class="badge bg-danger">Production</span>
-        </div>
-      <% elsif Rails.env.development? %>
-        <div class="col-auto">
-          <span class="badge bg-success">Development</span>
-        </div>
-      <% end %>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
-        <% if user_signed_in? %>
-          <li class="nav-item active">
-            <%= link_to "Dashboard", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Portfolio", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Watchlist", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Community", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item dropdown">
-          <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
-          </a>
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Action", "#", class: "dropdown-item" %>
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
-            </div>
-          </li>
-        <% else %>
-          <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
   </div>
+
+  <% if user_signed_in? %>
+    <div id='zh_nav'
+        style="
+          padding-x: 1rem;
+          font-size: 0.875rem;
+          background: white;
+          display: flex;
+          justify-content: start;
+          border-radius: 10px;
+          z-index: -1;
+        " >
+      <div
+        id="hover_pill"
+        style="
+          z-index: -2;
+          position: absolute;
+          opacity: 0;
+          border-radius: 10px;
+          background: #BBEDE1;
+          transition-property: width,transform,opacity;
+          transition-timing-function: cubic-bezier(.4,0,.2,1);
+        "></div>
+        <%= link_to 'dashboard', root_path, style: "padding: 0.5rem; color: #{ current_page?(root_path) ? "#4B7F73" : "#b3b3b3" }" %>
+        <%= link_to 'portfolio', "", style: "padding: 0.5rem; color: #{ current_page?("aa") ? "#4B7F73" : "#b3b3b3" }"  %>
+        <%= link_to 'watchlist', "", style: "padding: 0.5rem; color: #{ current_page?("aa") ? "#4B7F73" : "#b3b3b3" }" %>
+        <%= link_to 'community', "", style: "padding: 0.5rem; color: #{ current_page?("aa") ? "#4B7F73" : "#b3b3b3" }"  %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if user_signed_in? %>
+    <div style="position: fixed; right: 2rem;">
+      <div style="padding-top: 0.5rem;">
+        <%= link_to "👋", destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to log out?" }, style: "text-decoration: none;" %>
+      </div>
+    </div>
+  <% else %>
+   <div style="position: fixed; right: 2rem;">
+      <div style="">
+        <%= link_to "Login", new_user_session_path, class: "btn btn-success", style: "text-decoration: none;" %>
+      </div>
+    </div>
+  <% end %>
+</nav>
+
+<!-- Add padding to create space below the navigation bar -->
+<div style="padding-top: 3.5rem;"> <!-- Adjust the value as needed -->
+  <!-- Your content goes here -->
 </div>
