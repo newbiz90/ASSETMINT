@@ -7,21 +7,21 @@
 
 .container {
   background-color: #F7FDF7;
-  padding-top: 10px;
+  padding-top: 25px;
 }
 
 .txn-table {
-  border-bottom: 2px solid #4B7F73;
   margin-top: 20px;
-  border-radius: 0rem;
+  border-bottom: 2px solid #4B7F73;
+  border-top: 2px solid #4B7F73;
+  border-right: 2px solid #4B7F73;
+  // border-radius: 15px;
+
 }
 
 .table-header {
   display: flex;
   background-color: #BBEDE1;
-  border-top: 2px solid #4B7F73;
-  // border-left: 2px solid #4B7F73;
-  // border-right: 2px solid #4B7F73;
 }
 
 .transaction {
@@ -35,7 +35,15 @@
   justify-content: center; /* Horizontally centers the content */
   align-items: center; /* Vertically centers the content */
   border-left: 2px solid #4B7F73;
-  border-right: 2px solid #4B7F73;
+  // border-right: 2px solid #4B7F73;
+
+  input {
+    width: 100%;
+    border: none;
+    border-color: transparent;
+    text-align: center;
+  }
+  
 }
 
 .column input {
@@ -80,4 +88,8 @@
   display: flex;
   background-color: white;
 
+}
+
+.fa-heart {
+  color: #b2c9b2;
 }
