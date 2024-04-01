@@ -30,25 +30,24 @@
 
 .column {
   width: calc(100% / 7);
-  // border: 1px solid #000;
   text-align: center;
+  display: flex;
+  justify-content: center; /* Horizontally centers the content */
+  align-items: center; /* Vertically centers the content */
   border-left: 2px solid #4B7F73;
   border-right: 2px solid #4B7F73;
-
-  input {
-    width: 100%;
-    border: none;
-    border-color: transparent;
-    text-align: center;
-  }
 }
 
-.custom-dropdown {
-  height: 40px;
-  padding: 0px 0px; /* Adjust padding as needed */
+.column input {
+  width: 100%;
+  border: none;
+  border-color: transparent;
   text-align: center;
-  background-color: white;
+  display: flex;
+  justify-content: center; /* Horizontally centers the content */
+  align-items: center; /* Vertically centers the content */
 }
+
 
 #table-title {
   color: #4B7F73;
@@ -58,6 +57,24 @@
   display: flex;
   background-color: #E6FAF5;
 }
+
+.excel-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.excel-table td {
+  border: 1px solid #dddddd;
+  padding: 8px;
+}
+
+.excel-table th {
+  border: 1px solid #dddddd;
+  padding: 8px;
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
 
 .even-transaction {
   display: flex;
