@@ -34,7 +34,7 @@
         </div>
 
         <div class="column">
-          <%= form.date_field :txndate, value: Date.today.strftime('%Y-%m-%d'), placeholder: 'YYYY-MM-DD', pattern: '\d{4}-\d{2}-\d{2}', title: 'Enter date in YYYY-MM-DD format' %>
+          <%= form.date_field :txndate, value: Date.today.strftime('%Y-%m-%d'), class: 'form-control' %>
         </div>
 
         <div class="column">
@@ -46,14 +46,15 @@
         </div>
 
         <div class="column"></div>
-        <div class="form-group">
-          <%= form.submit "Create Txn" %>
-      </div>
+
+        <div class="column">
+          <%= form.submit "+", class: 'plus-sign' %>
+        </div>
+
       </div>
 
 
     <% end %>
-
     <% @mytxns.each do |txn| %>
       <% @txn_count += 1 %>
       <div class="transaction <%= @txn_count.odd? ? 'odd-transaction' : 'even-transaction' %>">
@@ -61,11 +62,12 @@
         <% ticker = @alltickers.find(usertxnticker.ticker_id) %>
         <div class="column"><%= txn.flow %></div>
         <div class="column"><%= ticker.name %></div>
-        <div class="column"><%= txn.txndate %></div>
+        <div class="column"><%= txn.txndate.strftime('%d/%m/%Y') %></div>
         <div class="column"><%= txn.txnprice %></div>
         <div class="column"><%= txn.qty %></div>
         <div class="column">???</div>
         <div class="column">???</div>
+
       </div>
     <% end %>
   </div>

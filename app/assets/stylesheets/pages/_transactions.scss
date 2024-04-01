@@ -43,7 +43,7 @@
     border-color: transparent;
     text-align: center;
   }
-  
+
 }
 
 .column input {
@@ -66,24 +66,6 @@
   background-color: #E6FAF5;
 }
 
-.excel-table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-.excel-table td {
-  border: 1px solid #dddddd;
-  padding: 8px;
-}
-
-.excel-table th {
-  border: 1px solid #dddddd;
-  padding: 8px;
-  background-color: #f2f2f2;
-  font-weight: bold;
-}
-
-
 .even-transaction {
   display: flex;
   background-color: white;
@@ -92,4 +74,11 @@
 
 .fa-heart {
   color: #b2c9b2;
+}
+
+.plus-sign {
+  font-size: 24px; /* Adjust the font size as needed */
+  color: green; /* Adjust the color as needed */
+  cursor: pointer; /* Add pointer cursor to indicate interactivity */
+  /* You can add additional styling here */
 }
