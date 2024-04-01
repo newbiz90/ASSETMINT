@@ -31,6 +31,9 @@
 .column {
   width: calc(100% / 7);
   text-align: center;
+  display: flex;
+  justify-content: center; /* Horizontally centers the content */
+  align-items: center; /* Vertically centers the content */
   border-left: 2px solid #4B7F73;
   // border-right: 2px solid #4B7F73;
 
@@ -40,14 +43,19 @@
     border-color: transparent;
     text-align: center;
   }
+
 }
 
-.custom-dropdown {
-  height: 40px;
-  padding: 0px 0px; /* Adjust padding as needed */
+.column input {
+  width: 100%;
+  border: none;
+  border-color: transparent;
   text-align: center;
-  background-color: white;
+  display: flex;
+  justify-content: center; /* Horizontally centers the content */
+  align-items: center; /* Vertically centers the content */
 }
+
 
 #table-title {
   color: #4B7F73;
@@ -66,4 +74,11 @@
 
 .fa-heart {
   color: #b2c9b2;
+}
+
+.plus-sign {
+  font-size: 24px; /* Adjust the font size as needed */
+  color: green; /* Adjust the color as needed */
+  cursor: pointer; /* Add pointer cursor to indicate interactivity */
+  /* You can add additional styling here */
 }

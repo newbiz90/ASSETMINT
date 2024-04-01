@@ -3,55 +3,71 @@
   <div class="txn-table">
     <!-- Existing Transactions -->
     <div class="table-header">
-      <div class="column"><h5>Flow</h5></div>
-      <div class="column"><h5>Ticker</h5></div>
-      <div class="column"><h5>Entry Date</h5></div>
-      <div class="column"><h5>Entry Price</h5></div>
-      <div class="column"><h5>Quantity</h5></div>
-      <div class="column"><h5>Current Price</h5></div>
-      <div class="column"><h5>P/L</h5></div>
+      <div class="column">Flow</div>
+      <div class="column">Ticker</div>
+      <div class="column">Entry Date</div>
+      <div class="column">Entry Price</div>
+      <div class="column">Quantity</div>
+      <div class="column">Current Price</div>
+      <div class="column">P/L</div>
     </div>
 
-    <!-- New Entry Form -->
-    <div class="transaction <%= @txn_count.odd? ? 'odd-transaction' : 'even-transaction' %>">
-          <div class="column">
-            <h5><select class="form-control custom-dropdown" name="flow">
-              <option value="Buy">Buy</option>
-              <option value="Sell">Sell</option>
-            </select></h5>
-          </div>
+    <%= form_with(model: @transaction, url: user_transactions_path(current_user), method: :post, html: { id: 'transaction-form' }) do |form| %>
 
-          <div class="column">
-            <h5>
-              <input type="text" placeholder="Enter Ticker" id="ticker-autocomplete" class="form-control" list="tickers-list">
-              <datalist id="tickers-list">
-                <% @alltickers.each do |ticker| %>
-                  <option value="<%= ticker.name %>">
-                <% end %>
-              </datalist>
-            </h5>
-          </div>
+      <!-- New Entry Form -->
+      <div class="transaction <%= @txn_count.odd? ? 'odd-transaction' : 'even-transaction' %>">
+        <div class="column">
+          <%= form.text_field :flow, list: 'flow-options', placeholder: 'Buy or Sell' %>
+          <datalist id="flow-options">
+            <option value="Buy">
+            <option value="Sell">
+          </datalist>
+        </div>
 
-          <div class="column"><h5><input type="date" placeholder="Enter Date"></h5></div>
-          <div class="column"><h5><input type="number" placeholder="Enter Price"></h5></div>
-          <div class="column"><h5><input type="number" placeholder="Enter Quantity"></h5></div>
+        <div class="column">
+          <%= form.text_field :ticker_id, id: 'ticker-autocomplete', placeholder: 'Enter Ticker', list: 'tickers-list' %>
+          <datalist id="tickers-list">
+            <% @alltickers.each do |ticker| %>
+              <option value="<%= ticker.name %>">
+            <% end %>
+          </datalist>
+        </div>
 
-          <div class="column"><h5><input type="number" placeholder="nn1"></h5></div>
-          <div class="column"><h5><input type="number" placeholder="nn2"></h5></div>
-    </div>
+        <div class="column">
+          <%= form.date_field :txndate, value: Date.today.strftime('%Y-%m-%d'), class: 'form-control' %>
+        </div>
 
+        <div class="column">
+          <%= form.number_field :txnprice, placeholder: 'Enter Price' %>
+        </div>
+
+        <div class="column">
+          <%= form.number_field :qty, placeholder: 'Enter Qty' %>
+        </div>
+
+        <div class="column"></div>
+
+        <div class="column">
+          <%= form.submit "+", class: 'plus-sign' %>
+        </div>
+
+      </div>
+
+
+    <% end %>
     <% @mytxns.each do |txn| %>
       <% @txn_count += 1 %>
       <div class="transaction <%= @txn_count.odd? ? 'odd-transaction' : 'even-transaction' %>">
         <% usertxnticker = @usertickers.find(txn.user_tickers_id) %>
         <% ticker = @alltickers.find(usertxnticker.ticker_id) %>
-        <div class="column"><h5><%= txn.flow %></h5></div>
-        <div class="column"><h5><%= ticker.name %></h5></div>
-        <div class="column"><h5><%= txn.txndate %></h5></div>
-        <div class="column"><h5><%= txn.txnprice %></h5></div>
-        <div class="column"><h5><%= txn.qty %></h5></div>
-        <div class="column"><h5>???</h5></div>
-        <div class="column"><h5>???</h5></div>
+        <div class="column"><%= txn.flow %></div>
+        <div class="column"><%= ticker.name %></div>
+        <div class="column"><%= txn.txndate.strftime('%d/%m/%Y') %></div>
+        <div class="column"><%= txn.txnprice %></div>
+        <div class="column"><%= txn.qty %></div>
+        <div class="column">???</div>
+        <div class="column">???</div>
+
       </div>
     <% end %>
   </div>

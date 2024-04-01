@@ -1,5 +1,6 @@
 class TransactionsController < ApplicationController
   def index
+    @transaction = Transaction.new
     @mytxns = Transaction.joins(:user_ticker).where(user_ticker:{user: current_user})
     @alltickers = Ticker.all
     @usertickers = UserTicker.all
@@ -14,7 +15,6 @@ class TransactionsController < ApplicationController
   def create
     ticker_name = params[:transaction][:ticker_id]
     ticker = Ticker.find_by(name: ticker_name)
-
     @transaction = Transaction.new(transaction_params)
     @transaction.user_ticker = current_user.user_tickers.find_or_create_by(ticker: ticker)
 
