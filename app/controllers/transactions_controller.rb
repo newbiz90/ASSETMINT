@@ -27,6 +27,14 @@ class TransactionsController < ApplicationController
     end
   end
 
+  # DELETE /transactions/:id
+  def destroy
+    @transaction = Transaction.find(params[:id])
+    @transaction.destroy
+    flash[:notice] = 'Transaction was successfully destroyed.'
+    redirect_to user_transactions_path(current_user)
+  end
+
   private
 
   def transaction_params

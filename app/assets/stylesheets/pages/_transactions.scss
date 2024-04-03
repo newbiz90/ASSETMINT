@@ -29,7 +29,7 @@
 }
 
 .column {
-  width: calc(100% / 7);
+  width: calc(100% / 6);
   text-align: center;
   display: flex;
   justify-content: center; /* Horizontally centers the content */
@@ -79,6 +79,13 @@
 .plus-sign {
   font-size: 24px; /* Adjust the font size as needed */
   color: green; /* Adjust the color as needed */
+  cursor: pointer; /* Add pointer cursor to indicate interactivity */
+  /* You can add additional styling here */
+}
+
+.minus-sign {
+  font-size: 24px; /* Adjust the font size as needed */
+  color: red; /* Adjust the color as needed */
   cursor: pointer; /* Add pointer cursor to indicate interactivity */
   /* You can add additional styling here */
 }
