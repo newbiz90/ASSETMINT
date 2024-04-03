@@ -1,4 +1,4 @@
-<%= javascript_include_tag 'watchlist' %>
+<%# <%= javascript_include_tag 'watchlist' %>
 
 <div class="container">
   <h3 id="table-title">All User<%=params[:id]%>'s Transactions</h3>
@@ -18,7 +18,7 @@
         <% @txn_count += 1 %>
           <div style="position: relative;" class="transaction <%= @txn_count.odd? ? 'odd-transaction' : 'even-transaction' %>">
             <% if current_user != @user %>
-              <span style="position: absolute; right: -2rem;"><i id="follow-heart" class="fa-regular fa-heart"></i></span>
+              <span style="position: absolute; right: -2rem;"><i class="fa-regular fa-heart"></i></span>
             <% end %>
             <% usertxnticker = @usertickers.find(txn.user_tickers_id) %>
             <% ticker = @alltickers.find(usertxnticker.ticker_id) %>
@@ -34,3 +34,13 @@
     </div>
   </div>
 </div>
+
+<%= javascript_include_tag 'watchlist' %>
+
+<script>
+  var otherUser = <%= raw @user.to_json %>;
+  var countHeart = 0;
+  allHearts.forEach(heart => {
+    console.log("hello");
+  });
+</script>
