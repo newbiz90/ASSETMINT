@@ -1,5 +1,32 @@
-hello from subscriptions page
-<br>
-<% @subs.each do |sub| %>
-  <%= pp sub.user_id %>
+<h2>Following</h2>
+
+<% if @transactions.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Company Name</th>
+        <th>Ticker Symbol</th>
+        <th>Entry Date</th>
+        <th>Entry Price</th>
+        <th>Qty</th>
+        <th>Current Price</th>
+        <th>P/L</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @transactions.each do |transaction| %>
+        <tr>
+          <td><%= transaction.user_ticker.ticker.name %></td>
+          <%# <td><%= transaction.user_ticker.ticker.symbol %></td> %>
+          <td><%= transaction.txndate %></td>
+          <td><%= transaction.txnprice %></td>
+          <td><%= transaction.qty %></td>
+          <td><!-- need to implement logic to fetch the current price --></td>
+          <td><!-- need to implement P/L calculation logic here --></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No transactions found.</p>
 <% end %>
