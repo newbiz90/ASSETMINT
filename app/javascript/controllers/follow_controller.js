@@ -11,7 +11,14 @@ export default class extends Controller {
       .then(data => {
         // Update the DOM
         if (data.success) {
-          this.element.innerHTML = data.buttonHtml;
+          // Display the message
+          alert("You are now following this user.");
+
+          // Update the followed user count
+          let followedUserCountElement = document.getElementById('followed-user-count');
+          if (followedUserCountElement) {
+            followedUserCountElement.innerText = parseInt(followedUserCountElement.innerText) + 1;
+          }
         }
       });
   }

@@ -16,5 +16,10 @@
         <%= link_to "Unfollow", unfollow_user_path(user), method: :delete, remote: true, class: "btn btn-sm btn-danger ml-2", data: { controller: "unfollow", action: "click->unfollow#unfollow", user_id: user.id } %>
       </div>
     <% end %>
+
+    <!-- Add the followed user count element here -->
+    <div id="followed-user-count">
+      <%= @followed_user_count %>
+    </div>
   </div>
 </div>
