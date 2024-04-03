@@ -17,8 +17,10 @@ Rails.application.routes.draw do
     resources :transactions, only: [:index, :create, :update, :destroy]
 
     # Route for following and unfollowing users
-    post 'follow', on: :member
-    delete 'unfollow', on: :member
+    member do
+      post 'follow'
+      delete 'unfollow'
+    end
   end
 
   # Routes for tickers
