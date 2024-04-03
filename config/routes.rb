@@ -45,6 +45,5 @@ Rails.application.routes.draw do
   get '/portfolio/search', to: 'portfolio#search', as: 'search_portfolio'
 
   # Routes for subscriptions
-  get '/subscriptions', to: 'subscriptions#index'
   resources :subscriptions
 end
