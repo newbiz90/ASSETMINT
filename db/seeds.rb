@@ -11,7 +11,7 @@ user2 = User.create(email: 'user2@example.com', password: 'password2', password_
 # Add more users if needed
 
 # Seed data for user_tickers (associating users with tickers)
-user_ticker1 = UserTicker.create(user: user1, ticker: ticker1)
+user_ticker1 = UserTicker.create(user: user1, ticker: ticker3)
 user_ticker2 = UserTicker.create(user: user2, ticker: ticker2)
 user_ticker3 = UserTicker.create(user: user2, ticker: ticker3)
 user_ticker4 = UserTicker.create(user: user2, ticker: ticker4)
@@ -27,6 +27,21 @@ subscription2 = Subscription.new(subscribable: user2, user_ticker: user_ticker1)
 puts "Subscription 2 valid?: #{subscription2.valid?}"
 puts "Subscription 2 errors: #{subscription2.errors.full_messages}"
 subscription2.save
+
+subscription3 = Subscription.new(subscribable: user1, user_ticker: user_ticker4)
+puts "Subscription 3 valid?: #{subscription3.valid?}"
+puts "Subscription 3 errors: #{subscription3.errors.full_messages}"
+subscription3.save
+
+subscription4 = Subscription.new(subscribable: user1, user_ticker: user_ticker3)
+puts "Subscription 4 valid?: #{subscription4.valid?}"
+puts "Subscription 4 errors: #{subscription4.errors.full_messages}"
+subscription4.save
+
+subscription5 = Subscription.new(subscribable: user1, user_ticker: user_ticker2)
+puts "Subscription 5 valid?: #{subscription5.valid?}"
+puts "Subscription 5 errors: #{subscription5.errors.full_messages}"
+subscription5.save
 
 # Seed data for news_snippets
 NewsSnippet.create(content: 'News snippet for AAPL', ticker: ticker1)
