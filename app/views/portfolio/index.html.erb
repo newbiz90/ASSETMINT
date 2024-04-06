@@ -2,6 +2,7 @@
 
 <div class="row justify-content-center">
   <div class="col-md-7">
+
     <%= form_tag(search_portfolio_path, method: :get, class: "d-flex mb-3") do %>
       <div class="input-group">
         <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Search..." %>
@@ -10,12 +11,19 @@
     <% end %>
 
     <% @users.each do |user| %>
-      <div class="user mb-2">
-        <%= user.email %>
-        <%= link_to "Follow", follow_user_path(user), method: :post, remote: true, class: "btn btn-sm btn-primary ml-2", data: { controller: "follow", action: "click->follow#follow", user_id: user.id } %>
-        <%= link_to "Unfollow", unfollow_user_path(user), method: :delete, remote: true, class: "btn btn-sm btn-danger ml-2", data: { controller: "unfollow", action: "click->unfollow#unfollow", user_id: user.id } %>
-      </div>
+      <% unless user == current_user %>
+        <div class="user mb-2">
+          <%= user.email %>
+          <% if Subscription.exists?(subscribable_type: 'User', subscribable_id: current_user.id, user_id: user.id) %>
+            <%= link_to "Unfollow", unfollow_user_path(user), method: :delete, remote: true, class: "btn btn-sm btn-danger ml-2", data: { controller: "unfollow", action: "click->unfollow#unfollow", user_id: user.id } %>
+          <% else %>
+            <%= link_to "Follow", follow_user_path(user), method: :post, remote: true, class: "btn btn-sm btn-primary ml-2", data: { controller: "follow", action: "click->follow#follow", user_id: user.id } %>
+          <% end %>
+        </div>
+      <% end %>
     <% end %>
+
+
 
     <!-- Add the followed user count element here -->
     <div id="followed-user-count">
