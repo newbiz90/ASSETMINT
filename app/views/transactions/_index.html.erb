@@ -5,15 +5,13 @@
     <div class="table-header">
       <div class="column">Flow</div>
       <div class="column">Ticker</div>
-      <div class="column">Entry Date</div>
-      <div class="column">Entry Price</div>
+      <div class="column">Date</div>
+      <div class="column">Price</div>
       <div class="column">Quantity</div>
-      <div class="column">Current Price</div>
-      <div class="column">P/L</div>
+      <div class="column">Action</div>
     </div>
 
     <%= form_with(model: @transaction, url: user_transactions_path(current_user), method: :post, html: { id: 'transaction-form' }) do |form| %>
-
       <!-- New Entry Form -->
       <div class="transaction <%= @txn_count.odd? ? 'odd-transaction' : 'even-transaction' %>">
         <div class="column">
@@ -45,30 +43,29 @@
           <%= form.number_field :qty, placeholder: 'Enter Qty' %>
         </div>
 
-        <div class="column"></div>
-
         <div class="column">
           <%= form.submit "+", class: 'plus-sign' %>
         </div>
 
       </div>
-
-
     <% end %>
+
     <% @mytxns.each do |txn| %>
       <% @txn_count += 1 %>
-      <div class="transaction <%= @txn_count.odd? ? 'odd-transaction' : 'even-transaction' %>">
-        <% usertxnticker = @usertickers.find(txn.user_tickers_id) %>
-        <% ticker = @alltickers.find(usertxnticker.ticker_id) %>
-        <div class="column"><%= txn.flow %></div>
-        <div class="column"><%= ticker.name %></div>
-        <div class="column"><%= txn.txndate.strftime('%d/%m/%Y') %></div>
-        <div class="column"><%= txn.txnprice %></div>
-        <div class="column"><%= txn.qty %></div>
-        <div class="column">???</div>
-        <div class="column">???</div>
-
-      </div>
+      <%= form_with(url: user_transaction_path(current_user, txn), method: :delete) do |form| %>
+        <div class="transaction <%= @txn_count.odd? ? 'odd-transaction' : 'even-transaction' %>">
+          <% usertxnticker = @usertickers.find(txn.user_tickers_id) %>
+          <% ticker = @alltickers.find(usertxnticker.ticker_id) %>
+          <div class="column"><%= txn.flow %></div>
+          <div class="column"><%= ticker.name %></div>
+          <div class="column"><%= txn.txndate.strftime('%d/%m/%Y') %></div>
+          <div class="column"><%= txn.txnprice %></div>
+          <div class="column"><%= txn.qty %></div>
+          <div class="column">
+              <%= form.submit "-", class: "minus-sign" %>
+          </div>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>
