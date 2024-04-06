@@ -17,10 +17,7 @@ Rails.application.routes.draw do
     resources :transactions, only: [:index, :create, :update, :destroy]
 
     # Route for following and unfollowing users
-    member do
-      post 'follow'
-      delete 'unfollow'
-    end
+    resources :portfolios, only: [:index, :create, :destroy]
   end
 
   # Routes for tickers
@@ -43,8 +40,7 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'dashboard#index'
 
   # Routes for portfolio
-  get '/portfolio', to: 'portfolio#index', as: 'portfolio'
-  get '/portfolio/search', to: 'portfolio#search', as: 'search_portfolio'
+
 
   # Routes for subscriptions
   resources :subscriptions
