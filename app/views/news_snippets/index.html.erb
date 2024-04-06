@@ -5,11 +5,3 @@
   <p><%= snippet.content %></p>
   <div>
 <% end %>
-
-<h2>Market News from Finnhub</h2>
-<% @finnhub_news.each do |news_item| %>
-  <div>
-    <h3><%= news_item.headline %></h3>
-    <p><%= news_item.summary %></p>
-  </div>
-<% end %>
