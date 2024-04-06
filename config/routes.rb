@@ -21,6 +21,9 @@ Rails.application.routes.draw do
 
     # Nested routes for dashboards associated with users
     resources :dashboards, only: [:index, :create, :destroy]
+
+    # Nested routes for news_snippets associated with users
+    resources :news_snippets, only: [:index, :create, :destroy]
   end
 
   # Routes for tickers
@@ -35,16 +38,8 @@ Rails.application.routes.draw do
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
 
-  resources :news_snippets
-
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Routes for dashboard
   get 'dashboard', to: 'dashboard#index'
-
-  # Routes for portfolio
-
-
-  # Routes for subscriptions
-  resources :subscriptions
 end
