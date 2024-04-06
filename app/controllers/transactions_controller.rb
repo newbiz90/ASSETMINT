@@ -1,11 +1,4 @@
 class TransactionsController < ApplicationController
-  def index
-    @transaction = Transaction.new
-    @mytxns = Transaction.joins(:user_ticker).where(user_ticker:{user: current_user})
-    @alltickers = Ticker.all
-    @usertickers = UserTicker.all
-    @txn_count = 0
-  end
 
   def new
     @transaction = Transaction.new
@@ -20,7 +13,8 @@ class TransactionsController < ApplicationController
 
     if @transaction.save
       flash[:notice] = 'Transaction was successfully created.'
-      redirect_to user_transactions_path(current_user)
+      #raise
+      redirect_to root_path(current_user)
     else
       flash.now[:alert] = 'Transaction could not be created.'
       render :new
