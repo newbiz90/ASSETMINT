@@ -7,7 +7,12 @@ export default class extends Controller {
 
     // Make an AJAX request to follow the user
     fetch(`/users/${userId}/follow`, { method: "POST", credentials: "same-origin" })
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to follow the user.');
+        }
+        return response.json();
+      })
       .then(data => {
         // Update the DOM
         if (data.success) {
@@ -19,7 +24,13 @@ export default class extends Controller {
           if (followedUserCountElement) {
             followedUserCountElement.innerText = parseInt(followedUserCountElement.innerText) + 1;
           }
+        } else {
+          alert("Failed to follow the user.");
         }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert("Failed to follow the user.");
       });
   }
 }
