@@ -46,4 +46,10 @@ Rails.application.routes.draw do
 
   # Routes for subscriptions
   resources :subscriptions
+
+  resources :users do
+    member do
+      get :gen_news_snp
+    end
+  end
 end

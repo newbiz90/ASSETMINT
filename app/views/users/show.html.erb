@@ -13,6 +13,12 @@
       <div class="column"><h6>P/L</h6></div>
     </div>
 
+
+  <% if current_user != @user %>
+    <%= link_to 'View Profile', user_path(@user), class: "view-profile-link" %>
+  <% end %>
+
+
     <div>
       <% @usertxns.each do |txn| %>
         <% @txn_count += 1 %>
@@ -33,4 +39,25 @@
       <% end %>
     </div>
   </div>
+</div>
+
+
+<div class="container my-4">
+  <%= link_to 'Generate News Snippets', gen_news_snp_user_path(@user), class: "btn btn-primary" %>
+</div>
+
+
+
+<div class="container">
+  <h3>Latest News for Your Tickers</h3>
+  <% if @user_news_snippets.any? %>
+    <% @user_news_snippets.each do |snippet| %>
+      <div class="news-snippet">
+        <h4><%= snippet.ticker.name %>:</h4>
+        <p><%= snippet.content %></p>
+      </div>
+    <% end %>
+  <% else %>
+    <p>No news available for your tickers.</p>
+  <% end %>
 </div>
