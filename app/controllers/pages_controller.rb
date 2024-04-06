@@ -2,6 +2,11 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: :home
 
   def home
+    @transaction = Transaction.new
+    @mytxns = Transaction.joins(:user_ticker).where(user_ticker:{user: current_user})
+    @alltickers = Ticker.all
+    @usertickers = UserTicker.all
+    @txn_count = 0
   end
 
   # GET /landing_page
