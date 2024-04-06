@@ -3,14 +3,19 @@ class PortfoliosController < ApplicationController
     @users = User.all # or any other query to retrieve users
   end
 
+  def new
+    @subscription = Subscription.new
+  end
+
   def create
-    subscribable_user = User.find(params[:user_id])
-    subscription = Subscription.new(subscribable: subscribable_user, subscriber: current_user)
-    if subscription.save
-      redirect_to portfolio_path, notice: 'Subscribed successfully!'
+    user = User.find(params[:user_id])
+    @subscription = Subscription.new(subscribable: current_user, user: user)
+    if @subscription.save
+      flash[:notice] = 'Subscribed successfully!'
     else
-      redirect_to portfolio_path, alert: 'Subscription failed!'
+      flash[:alert] = 'Subscription failed!'
     end
+    redirect_to user_portfolios_path(current_user)
   end
 
   def destroy
@@ -23,5 +28,11 @@ class PortfoliosController < ApplicationController
       flash[:alert] = 'Unsubscription failed!'
     end
     redirect_to user_portfolios_path(current_user)
+  end
+
+  private
+
+  def subscription_params
+    params.require(:subscription).permit(:subscribable_id, :subscriber_id)
   end
 end
