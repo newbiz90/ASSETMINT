@@ -16,8 +16,11 @@ Rails.application.routes.draw do
     # Nested routes for transactions associated with users
     resources :transactions, only: [:index, :create, :update, :destroy]
 
-    # Route for following and unfollowing users
+    # Nested routes for portfolios associated with users
     resources :portfolios, only: [:index, :create, :destroy]
+
+    # Nested routes for dashboards associated with users
+    resources :dashboards, only: [:index, :create, :destroy]
   end
 
   # Routes for tickers
