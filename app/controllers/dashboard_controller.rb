@@ -11,7 +11,7 @@ class DashboardController < ApplicationController
     @newstickers = UserTicker.includes(:ticker).sample(5)
 
     if params[:refresh_news]
-      PolygonApiClient.get_news(@newstickers.sample(5).map(&:ticker).map(&:name))
+      PolygonApiClient.get_news(@newstickers.map(&:ticker).map(&:name))
     end
 
     @news_snippets = NewsSnippet.where(
