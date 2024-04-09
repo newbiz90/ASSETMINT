@@ -9,16 +9,16 @@ Rails.application.routes.draw do
   devise_for :users
 
   # Nested routes for subscriptions associated with users
-  resources :subscriptions, only: [:index, :create, :destroy]
+  resources :subscriptions, only: [:create, :destroy]
+  get "following", to: "subscriptions#following"
 
   # Nested routes for transactions associated with users
   resources :transactions, only: [:index, :create, :update, :destroy]
 
   # Nested routes for portfolios associated with users
-  resources :portfolios, only: [:index, :create, :destroy]
-
-  # Nested routes for dashboards associated with users
-  resources :dashboards, only: [:index, :create, :destroy]
+  resources :portfolios, only: [:index, :show, :create, :destroy] do
+    get "me", on: :collection
+  end
 
   # Nested routes for news_snippets associated with users
   resources :news_snippets, only: [:index, :create, :destroy]
@@ -39,4 +39,5 @@ Rails.application.routes.draw do
 
   # Routes for dashboard
   get 'dashboard', to: 'dashboard#index'
+  get 'community', to: 'community#index'
 end

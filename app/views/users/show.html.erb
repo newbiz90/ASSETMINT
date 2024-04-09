@@ -20,7 +20,7 @@
             <% if current_user != @user %>
               <span style="position: absolute; right: -2rem;"><i class="fa-regular fa-heart"></i></span>
             <% end %>
-            <% usertxnticker = @usertickers.find(txn.user_tickers_id) %>
+            <% usertxnticker = @usertickers.find(txn.user_ticker_id) %>
             <% ticker = @alltickers.find(usertxnticker.ticker_id) %>
             <div class="column"><h6><%= txn.flow %></h6></div>
             <div class="column"><h6><%= pp ticker.name %></h6></div>

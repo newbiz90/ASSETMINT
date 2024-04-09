@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_30_063517) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_09_170719) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,6 +19,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_30_063517) do
     t.bigint "ticker_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "title"
+    t.string "article_url"
+    t.jsonb "keywords"
+    t.jsonb "tickers"
+    t.string "publisher_logo_url"
+    t.string "publisher_name"
     t.index ["ticker_id"], name: "index_news_snippets_on_ticker_id"
   end
 
@@ -26,12 +32,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_30_063517) do
     t.string "subscribable_type", null: false
     t.bigint "subscribable_id", null: false
     t.bigint "user_id"
-    t.bigint "user_ticker_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["subscribable_type", "subscribable_id"], name: "index_subscriptions_on_subscribable"
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
-    t.index ["user_ticker_id"], name: "index_subscriptions_on_user_ticker_id"
   end
 
   create_table "tickers", force: :cascade do |t|
@@ -42,7 +46,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_30_063517) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.bigint "user_tickers_id", null: false
     t.string "flow"
     t.date "txndate"
     t.decimal "txnprice"
@@ -50,7 +53,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_30_063517) do
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_tickers_id"], name: "index_transactions_on_user_tickers_id"
+    t.bigint "user_ticker_id"
+    t.index ["user_ticker_id"], name: "index_transactions_on_user_ticker_id"
   end
 
   create_table "user_tickers", force: :cascade do |t|
@@ -75,9 +79,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_30_063517) do
   end
 
   add_foreign_key "news_snippets", "tickers"
-  add_foreign_key "subscriptions", "user_tickers"
   add_foreign_key "subscriptions", "users"
-  add_foreign_key "transactions", "user_tickers", column: "user_tickers_id"
+  add_foreign_key "transactions", "user_tickers"
   add_foreign_key "user_tickers", "tickers"
   add_foreign_key "user_tickers", "users"
 end

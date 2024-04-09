@@ -16,6 +16,8 @@
     <tbody>
       <% @transactions.each do |transaction| %>
         <tr>
+          <td><%= transaction.user.email %></td>
+
           <td><%= transaction.user_ticker.ticker.name %></td>
           <%# <td><%= transaction.user_ticker.ticker.symbol %></td>
           <td><%= transaction.txndate %></td>

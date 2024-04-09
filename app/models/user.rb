@@ -5,7 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   # Subscriptions as a subscribable entity
-  has_many :subscriptions, as: :subscribable
+  has_many :subscribers, as: :subscribable, class_name: 'Subscription'
+
+  has_many :subscriptions
 
   # Follower associations
   has_many :follower_subscriptions, foreign_key: :subscribable_id, class_name: "Subscription"
@@ -16,4 +18,6 @@ class User < ApplicationRecord
   has_many :following, through: :following_subscriptions, source: :subscribable, source_type: 'User'
   has_many :user_tickers
   has_many :tickers, through: :user_tickers
+
+  has_many :transactions, through: :user_tickers
 end

@@ -1,4 +1,4 @@
-<nav id='nav' <%= user_signed_in? ? "data-turbo-permanent" : "" %> data-controller="navigation"
+<nav id='nav' data-controller="navigation"
      style="
       padding: 1rem;
       display: flex; top: 0; position: fixed;
@@ -34,11 +34,10 @@
           transition-property: width,transform,opacity;
           transition-timing-function: cubic-bezier(.4,0,.2,1);
         "></div>
-        <%= link_to 'dashboard', dashboards_path, style: "padding: 0.5rem; color: #{current_page?(dashboards_path) ? '#4B7F73' : '#b3b3b3'}" %>
-        <%= link_to 'portfolio', portfolios_path, style: "padding: 0.5rem; color: #{current_page?(portfolios_path) ? '#4B7F73' : '#b3b3b3'}" %>
-        <%= link_to 'watchlist', "", style: "padding: 0.5rem; color: #{ current_page?("aa") ? "#4B7F73" : "#b3b3b3" }" %>
-        <%= link_to 'community', "", style: "padding: 0.5rem; color: #{ current_page?("aa") ? "#4B7F73" : "#b3b3b3" }" %>
-        <%= link_to 'news snippet', news_snippets_path, style: "padding: 0.5rem; color: #{current_page?(news_snippets_path) ? '#4B7F73' : '#b3b3b3'}" %>
+        <%= link_to 'dashboard', dashboard_path, style: "padding: 0.5rem; color: #{current_page?(dashboard_path) ? '#4B7F73' : '#b3b3b3'}" %>
+        <%= link_to 'portfolio', portfolio_path(current_user), style: "padding: 0.5rem; color: #{current_page?(portfolio_path(current_user)) ? '#4B7F73' : '#b3b3b3'}" %>
+        <%= link_to 'following', following_path, style: "padding: 0.5rem; color: #{ current_page?(following_path) ? "#4B7F73" : "#b3b3b3" }" %>
+        <%= link_to 'community', community_path, style: "padding: 0.5rem; color: #{ current_page?(community_path) ? "#4B7F73" : "#b3b3b3" }" %>
       </div>
     </div>
   <% end %>

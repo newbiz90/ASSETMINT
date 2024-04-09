@@ -2,10 +2,13 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: :home
 
   def home
+    return redirect_to dashboard_path if user_signed_in?
+
     @transaction = Transaction.new
     @mytxns = Transaction.joins(:user_ticker).where(user_ticker:{user: current_user})
     @alltickers = Ticker.all
     @usertickers = UserTicker.all
+
     @txn_count = 0
   end
 

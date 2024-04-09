@@ -6,20 +6,24 @@
 // $side-bar-bg: #F1FFFC;
 
 .container {
-  background-color: #F7FDF7;
   padding-top: 25px;
 }
 
 .txn-table {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  overflow: hidden;
   margin-top: 20px;
   border-bottom: 2px solid #4B7F73;
   border-top: 2px solid #4B7F73;
   border-right: 2px solid #4B7F73;
-  // border-radius: 15px;
+  border-left: 2px solid #4B7F73;
+  border-radius: 8px;
 
 }
 
 .table-header {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   display: flex;
   background-color: #BBEDE1;
 }
@@ -34,7 +38,6 @@
   display: flex;
   justify-content: center; /* Horizontally centers the content */
   align-items: center; /* Vertically centers the content */
-  border-left: 2px solid #4B7F73;
   // border-right: 2px solid #4B7F73;
 
   input {
@@ -64,12 +67,23 @@
 .odd-transaction {
   display: flex;
   background-color: #E6FAF5;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+
+  .minus-sign {
+    background: #E6FAF5;
+  }
 }
 
 .even-transaction {
   display: flex;
   background-color: white;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 
+  .minus-sign {
+    background: white;
+  }
 }
 
 .fa-heart {
@@ -77,6 +91,7 @@
 }
 
 .plus-sign {
+  background: white;
   font-size: 24px; /* Adjust the font size as needed */
   color: green; /* Adjust the color as needed */
   cursor: pointer; /* Add pointer cursor to indicate interactivity */

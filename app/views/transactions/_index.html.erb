@@ -1,5 +1,8 @@
-<div class="container">
-  <h3 id="table-title">All My Transactions</h3>
+<div>
+  <div class="d-flex justify-content-between">
+    <h3 id="table-title">My Recent Trades</h3>
+    <%= link_to "View full portfolio", portfolio_path(current_user), style: "color: black; text-decoration: underline; text-decoration-style: dotted;" %>
+  </div>
   <div class="txn-table">
     <!-- Existing Transactions -->
     <div class="table-header">
@@ -54,7 +57,7 @@
       <% @txn_count += 1 %>
       <%= form_with(url: transaction_path(txn), method: :delete) do |form| %>
         <div class="transaction <%= @txn_count.odd? ? 'odd-transaction' : 'even-transaction' %>">
-          <% usertxnticker = @usertickers.find(txn.user_tickers_id) %>
+          <% usertxnticker = @usertickers.find(txn.user_ticker_id) %>
           <% ticker = @alltickers.find(usertxnticker.ticker_id) %>
           <div class="column"><%= txn.flow %></div>
           <div class="column"><%= ticker.name %></div>

@@ -12,6 +12,10 @@
 @import "pages/index";
 @import "pages/transactions";
 
+h3 {
+  font-size: 1.2rem;
+}
+
 /* Custom CSS */
 
 /* Styles for news feed */
@@ -21,9 +25,9 @@
 }
 
 .news-feed-text {
-  font-size: 16px;
+  font-size: 0.8rem;
   color: #333; /* Dark grey text */
-  margin-bottom: 15px; /* Spacing below paragraphs */
+  margin-bottom: 2rem; /* Spacing below paragraphs */
 }
 
 .news-feed-main-header {
@@ -52,5 +56,5 @@
 
 /* Body styles */
 body {
-  background-color: #F7FDF7; /* Set the background color of the body */
+  background-color: #fdfdfd; /* Set the background color of the body */
 }

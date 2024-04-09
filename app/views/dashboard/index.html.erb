@@ -1,0 +1,21 @@
+<% if user_signed_in? %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="shadow-container mb-4 p-4" style="border-color: green;">
+          <p>
+            <i class="fas fa-chart-line" style="margin-right: 0.5rem;"></i>What's happening today
+          </p>
+          <p>
+            Major indexes rose after the Fed kept rates steady, with most officials expecting cuts between 2024 and 2026, hinting at a positive shift in the economy
+          </p>
+        </div>
+        <%= render partial: 'news_snippets/dashboard' %>
+      </div>
+      <div class="col-md-8">
+        <%= render partial: 'transactions/index' %>
+        <h3 id="table-title" style="margin-top: 4rem;">Community Trades</h3>
+      </div>
+    </div>
+  </div>
+<% end %>

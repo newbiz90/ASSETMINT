@@ -1,0 +1,36 @@
+<h1>Community</h1>
+
+
+<div class="row justify-content-center">
+  <div class="col-md-7">
+    <% @users.each do |user| %>
+      <% unless user == current_user %>
+        <div class="user mb-2">
+          <%= user.email %>
+          <% # N+1 violation here but KIV for now  %>
+          <% existing_subscripton = Subscription.find_by(subscribable_type: 'User', subscribable_id: user.id, user_id: current_user.id) %>
+          <% if existing_subscripton.present? %>
+            <%= form_with(url: subscriptions_path, method: :delete) do |form| %>
+              <%= form.submit "Unfollow", class: "btn btn-sm btn-danger ml-2", data: { disable_with: "Unfollowing..." } %>
+            <% end %>
+          <% else %>
+            <%= form_with(url: subscriptions_path, method: :post) do |form| %>
+              <%= form.hidden_field :subscribable_type, value: "User" %>
+              <%= form.hidden_field :subscribable_id, value: user.id %>
+              <%= form.submit "Follow", class: "btn btn-sm btn-primary ml-2", data: { disable_with: "Following..." } %>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <!-- Add the followed user count element here -->
+    <%
+=begin%>
+ <div id="followed-user-count">
+      <%= @followed_user_count %>
+    </div> 
+<%
+=end%>
+  </div>
+</div>

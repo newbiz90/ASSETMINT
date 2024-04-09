@@ -7,13 +7,13 @@ class TransactionsController < ApplicationController
 
   def create
     ticker_name = params[:transaction][:ticker_id]
-    ticker = Ticker.find_by(name: ticker_name)
+    ticker = Ticker.find_or_create_by(name: ticker_name)
     @transaction = Transaction.new(transaction_params)
     @transaction.user_ticker = current_user.user_tickers.find_or_create_by(ticker: ticker)
 
     if @transaction.save
       flash[:notice] = 'Transaction was successfully created.'
-      redirect_to dashboards_path
+      redirect_to dashboard_path
     else
       flash.now[:alert] = 'Transaction could not be created.'
       render :new
@@ -25,7 +25,7 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.find(params[:id])
     @transaction.destroy
     flash[:notice] = 'Transaction was successfully destroyed.'
-    redirect_to dashboards_path
+    redirect_to dashboard_path
   end
 
   private
