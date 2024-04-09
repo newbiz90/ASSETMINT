@@ -8,26 +8,26 @@ class PortfoliosController < ApplicationController
   end
 
   def create
-    user = User.find(params[:user_id])
+    user = User.find(params[:subscribable_id])
     @subscription = Subscription.new(subscribable: current_user, user: user)
     if @subscription.save
       flash[:notice] = 'Subscribed successfully!'
     else
       flash[:alert] = 'Subscription failed!'
     end
-    redirect_to user_portfolios_path(current_user)
+    redirect_to portfolios_path
   end
 
   def destroy
-    subscribable_user = User.find(params[:user_id])
+    subscribable_user = User.find(params[:id])
     user = User.find(params[:id])
-    subscription = current_user.subscriptions.find_by(subscribable: subscribable_user, user: user)
+    subscription = current_user.subscriptions.find_by(subscribable: current_user, user: user)
     if subscription.destroy
       flash[:notice] = 'Unsubscribed successfully!'
     else
       flash[:alert] = 'Unsubscription failed!'
     end
-    redirect_to user_portfolios_path(current_user)
+    redirect_to portfolios_path
   end
 
   private

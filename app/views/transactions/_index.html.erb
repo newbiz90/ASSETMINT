@@ -52,7 +52,7 @@
 
     <% @mytxns.each do |txn| %>
       <% @txn_count += 1 %>
-      <%= form_with(url: transaction_path(current_user, txn), method: :delete) do |form| %>
+      <%= form_with(url: transaction_path(txn), method: :delete) do |form| %>
         <div class="transaction <%= @txn_count.odd? ? 'odd-transaction' : 'even-transaction' %>">
           <% usertxnticker = @usertickers.find(txn.user_tickers_id) %>
           <% ticker = @alltickers.find(usertxnticker.ticker_id) %>

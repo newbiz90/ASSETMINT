@@ -8,7 +8,7 @@
         <div class="user mb-2">
           <%= user.email %>
           <% if Subscription.exists?(subscribable_type: 'User', subscribable_id: current_user.id, user_id: user.id) %>
-            <%= form_with(url: portfolio_path(current_user, user), method: :delete) do |form| %>
+            <%= form_with(url: portfolio_path(user), method: :delete) do |form| %>
               <%= form.submit "Unfollow", class: "btn btn-sm btn-danger ml-2", data: { disable_with: "Unfollowing..." } %>
             <% end %>
           <% else %>
