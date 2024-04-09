@@ -35,7 +35,7 @@ class PolygonApiClient
         def api_call(path)
             RestClient.get(
                 "#{API_ENDPOINT}/#{path}",
-                { Authorization: "Bearer #{POLYGON_API_KEY}"}
+                { Authorization: "Bearer #{ENV["POLYGON_API_KEY"]}"}
             )
         end
     end
