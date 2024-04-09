@@ -8,11 +8,11 @@
         <div class="user mb-2">
           <%= user.email %>
           <% if Subscription.exists?(subscribable_type: 'User', subscribable_id: current_user.id, user_id: user.id) %>
-            <%= form_with(url: user_portfolio_path(current_user, user), method: :delete) do |form| %>
+            <%= form_with(url: portfolio_path(current_user, user), method: :delete) do |form| %>
               <%= form.submit "Unfollow", class: "btn btn-sm btn-danger ml-2", data: { disable_with: "Unfollowing..." } %>
             <% end %>
           <% else %>
-            <%= form_with(url: user_portfolios_path(user), method: :post) do |form| %>
+            <%= form_with(url: portfolios_path(user), method: :post) do |form| %>
               <%= form.hidden_field :subscribable_id, value: user.id %>
               <%= form.submit "Follow", class: "btn btn-sm btn-primary ml-2", data: { disable_with: "Following..." } %>
             <% end %>

@@ -11,7 +11,7 @@
       <div class="column">Action</div>
     </div>
 
-    <%= form_with(model: @transaction, url: user_transactions_path(current_user), method: :post, html: { id: 'transaction-form' }) do |form| %>
+    <%= form_with(model: @transaction, url: transactions_path(current_user), method: :post, html: { id: 'transaction-form' }) do |form| %>
       <!-- New Entry Form -->
       <div class="transaction <%= @txn_count.odd? ? 'odd-transaction' : 'even-transaction' %>">
         <div class="column">
@@ -52,7 +52,7 @@
 
     <% @mytxns.each do |txn| %>
       <% @txn_count += 1 %>
-      <%= form_with(url: user_transaction_path(current_user, txn), method: :delete) do |form| %>
+      <%= form_with(url: transaction_path(current_user, txn), method: :delete) do |form| %>
         <div class="transaction <%= @txn_count.odd? ? 'odd-transaction' : 'even-transaction' %>">
           <% usertxnticker = @usertickers.find(txn.user_tickers_id) %>
           <% ticker = @alltickers.find(usertxnticker.ticker_id) %>
