@@ -35,6 +35,6 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Routes for dashboard
-  get 'dashboard', to: 'dashboard#index'
-  get 'community', to: 'community#index'
+  resource :dashboard, only: [:show]
+  resource :community, only: [:show]
 end

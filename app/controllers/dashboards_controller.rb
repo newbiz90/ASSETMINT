@@ -1,7 +1,7 @@
 class DashboardController < ApplicationController
   before_action :authenticate_user! # Ensure user is authenticated
 
-  def index
+  def show
     @transaction = Transaction.new
     @mytxns = Transaction.joins(:user_ticker).where(user_ticker:{user: current_user})
     @alltickers = Ticker.all
