@@ -1,4 +1,4 @@
-class DashboardController < ApplicationController
+class DashboardsController < ApplicationController
   before_action :authenticate_user! # Ensure user is authenticated
 
   def show

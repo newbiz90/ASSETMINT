@@ -1,4 +1,4 @@
-class CommunityController < ApplicationController
+class CommunitiesController < ApplicationController
   before_action :authenticate_user! # Ensure user is authenticated
 
   def show
