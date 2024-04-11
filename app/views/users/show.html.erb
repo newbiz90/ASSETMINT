@@ -1,7 +1,7 @@
-<%# <%= javascript_include_tag 'watchlist' %>
+<%= javascript_include_tag 'watchlist' %>
 
 <div class="container">
-  <h3 id="table-title">All User<%=params[:id]%>'s Transactions</h3>
+  <h3 id="table-title">All User <%= h(params[:id]) %>'s Transactions</h3>
   <div class="txn-table">
     <div class="table-header">
       <div class="column"><h6>Flow</h6></div>
@@ -13,34 +13,47 @@
       <div class="column"><h6>P/L</h6></div>
     </div>
 
+    <% if current_user != @user %>
+      <%= link_to 'View Profile', user_path(@user), class: "view-profile-link" %>
+    <% end %>
+
     <div>
+      <% @txn_count = 0 %>
       <% @usertxns.each do |txn| %>
         <% @txn_count += 1 %>
-          <div style="position: relative;" class="transaction <%= @txn_count.odd? ? 'odd-transaction' : 'even-transaction' %>">
-            <% if current_user != @user %>
-              <span style="position: absolute; right: -2rem;"><i class="fa-regular fa-heart"></i></span>
-            <% end %>
-            <% usertxnticker = @usertickers.find(txn.user_tickers_id) %>
-            <% ticker = @alltickers.find(usertxnticker.ticker_id) %>
-            <div class="column"><h6><%= txn.flow %></h6></div>
-            <div class="column"><h6><%= pp ticker.name %></h6></div>
-            <div class="column"><h6><%= txn.txndate %></h6></div>
-            <div class="column"><h6><%= txn.txnprice %></h6></div>
-            <div class="column"><h6><%= txn.qty %></h6></div>
-            <div class="column"><h6>123</h6></div>
-            <div class="column"><h6>123</h6></div>
-          </div>
+        <div style="position: relative;" class="transaction <%= @txn_count.odd? ? 'odd-transaction' : 'even-transaction' %>">
+          <% if current_user != @user %>
+            <span style="position: absolute; right: -2rem;"><i class="fa-regular fa-heart"></i></span>
+          <% end %>
+          <% usertxnticker = @usertickers.find_by(id: txn.user_tickers_id) %>
+          <% ticker = @alltickers.find_by(id: usertxnticker.ticker_id) if usertxnticker %>
+          <div class="column"><h6><%= txn.flow %></h6></div>
+          <div class="column"><h6><%= ticker ? h(ticker.name) : 'Unknown Ticker' %></h6></div>
+          <div class="column"><h6><%= txn.txndate %></h6></div>
+          <div class="column"><h6><%= txn.txnprice %></h6></div>
+          <div class="column"><h6><%= txn.qty %></h6></div>
+          <div class="column"><h6>123</h6></div>
+          <div class="column"><h6>123</h6></div>
+        </div>
       <% end %>
     </div>
   </div>
 </div>
 
-<%= javascript_include_tag 'watchlist' %>
+<div class="container my-4">
+  <%= link_to 'Generate News Snippets', gen_news_snp_user_path(@user), class: "btn btn-primary" %>
+</div>
 
-<script>
-  var otherUser = <%= raw @user.to_json %>;
-  var countHeart = 0;
-  allHearts.forEach(heart => {
-    console.log("hello");
-  });
-</script>
+<div class="container">
+  <h3>Latest News for Your Tickers</h3>
+  <% if @user_news_snippets.any? %>
+    <% @user_news_snippets.each do |snippet| %>
+      <div class="news-snippet">
+        <h4><%= snippet.ticker.name %>:</h4>
+        <p><%= snippet.content %></p>
+      </div>
+    <% end %>
+  <% else %>
+    <p>No news available for your tickers.</p>
+  <% end %>
+</div>
