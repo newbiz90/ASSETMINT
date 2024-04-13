@@ -17,5 +17,23 @@ class DashboardsController < ApplicationController
     @news_snippets = NewsSnippet.where(
       ticker: @usertickers.map(&:ticker)
     ).order(created_at: :desc).limit(5)
+
+    # Fetching headlines
+    news_headlines = FinancialNewsApiClient.top_headlines
+
+    # Extracting titles
+    titles = news_headlines["articles"].map { |article| article["title"] }
+
+    # Concatenating titles into a single prompt
+    prompt = titles.join("\n")
+
+    # Prompting for a passage summarization
+    prompt += "\nSummarize the above headlines into a passage of not more than 50 words.\n"
+
+    # Calling OpenAI service to generate a summary
+    summary_response = OpenaiApiClient.create_chat(prompt)
+
+    # Extracting the summary from the response
+    @summary = summary_response["choices"].first["message"]["content"]
   end
 end
