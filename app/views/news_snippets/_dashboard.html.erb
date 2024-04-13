@@ -1,5 +1,8 @@
 <div class="container bg-white shadow-container">
   <div>
+    <% if @news_snippets.length == 0 %>
+      <%= link_to 'Generate News Snippets', dashboard_path(refresh_news: true), class: "btn btn-primary" %>
+    <% end %>
     <% @news_snippets.each do |snippet| %>
         <h3 class="news-feed-header">
           <%= snippet.title %>
