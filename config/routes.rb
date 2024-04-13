@@ -37,4 +37,7 @@ Rails.application.routes.draw do
   # Routes for dashboard
   resource :dashboard, only: [:show]
   resource :community, only: [:show]
-end
+
+  # get sub by email
+  get 'subscriptions/following', to: 'subscriptions#following'
+  end
