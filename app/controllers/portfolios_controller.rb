@@ -5,6 +5,7 @@ class PortfoliosController < ApplicationController
     @followers_count = @user.followers.count
     @following_count = @user.following.count
     @usertxns = Transaction.where(user_ticker: @user.user_tickers)
+    @transactions = @user.transactions
     @alltickers = Ticker.all
     @txn_count = 0
     @usertickers = UserTicker.all

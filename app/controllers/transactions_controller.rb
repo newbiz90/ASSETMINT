@@ -5,6 +5,14 @@ class TransactionsController < ApplicationController
     @alltickers = Ticker.all
   end
 
+  def index
+    if params[:search].present? && params[:search][:ticker_name].present?
+      @transactions = Transaction.filtered_transactions(params[:search][:ticker_name])
+    else
+      @transactions = Transaction.all
+    end
+  end
+
   def create
     ticker_name = params[:transaction][:ticker_id]
     ticker = Ticker.find_or_create_by(name: ticker_name)
