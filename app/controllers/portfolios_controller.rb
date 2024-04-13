@@ -10,9 +10,25 @@ class PortfoliosController < ApplicationController
     @txn_count = 0
     @usertickers = UserTicker.all
 
+    # Calculate hash of transactions_info to use as version
+    transactions_info_hash = Digest::SHA256.hexdigest(@usertxns.map { |txn| txn.cache_key }.join(","))
+
+    # Fetch or generate summary from cache
+    @summary = Rails.cache.fetch("portfolio_summary_#{params[:id]}_#{transactions_info_hash}", expires_in: 24.hour) do
+      generate_summary
+    end
+  end
+
+  def me
+    redirect_to portfolio_path(current_user)
+  end
+
+  private
+
+  def generate_summary
     # Extracting relevant information from @usertxns
     transactions_info = @usertxns.map do |txn|
-      ticker_symbol = txn.user_ticker.ticker.name  # Assuming user_ticker is associated with the UserTicker model
+      ticker_symbol = txn.user_ticker.ticker.name
       "#{txn.flow} transaction for #{ticker_symbol} at $#{txn.txnprice} per share"
     end
 
@@ -23,10 +39,6 @@ class PortfoliosController < ApplicationController
     summary_response = OpenaiApiClient.create_chat(prompt)
 
     # Extracting the summary from the response
-    @summary = summary_response["choices"].first["message"]["content"]
-  end
-
-  def me
-    redirect_to portfolio_path(current_user)
+    summary_response["choices"].first["message"]["content"]
   end
 end
