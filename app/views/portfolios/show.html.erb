@@ -1,6 +1,6 @@
 <%# <%= javascript_include_tag 'watchlist' %>
 
-<% if @transactions.empty? && params[:search].present? %>
+<% if @usertxns.empty? && params[:search].present? %>
   <div class="alert alert-warning" role="alert">
     No transactions found for the specified ticker.
   </div>
@@ -9,7 +9,7 @@
 <div class="container">
   <h3 id="table-title">All User<%=params[:id]%>'s Transactions</h3>
 
-  <%= simple_form_for :search, url: transactions_path, method: :get, html: { class: "mb-3", style: "margin-top: 2rem" } do |f| %>
+  <%= simple_form_for :search, url: portfolio_path(current_user), method: :get, html: { class: "mb-3", style: "margin-top: 2rem" } do |f| %>
     <%= f.input :ticker_name, label: 'Search by Ticker', input_html: { class: 'form-control' }, label: false %>
     <%= f.button :submit, "Search", class: "btn btn-primary" %>
   <% end %>
