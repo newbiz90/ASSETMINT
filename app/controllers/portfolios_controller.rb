@@ -2,6 +2,7 @@ class PortfoliosController < ApplicationController
   def show
     @user = User.find(params[:id])
 
+    @transaction = Transaction.new
     @followers_count = @user.followers.count
     @following_count = @user.following.count
     @usertxns = Transaction.where(user_ticker: @user.user_tickers)

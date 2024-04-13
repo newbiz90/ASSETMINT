@@ -11,7 +11,7 @@
       <%= @summary %>
     </p>
   </div>
-
+  
   <%= simple_form_for :search, url: "search_path", method: :get, html: { class: "mb-3", style: "margin-top: 2rem" } do |f| %>
     <%= f.input :ticker_name, label: 'Search by Ticker', input_html: { class: 'form-control' }, label: false %>
   <% end %>
@@ -56,11 +56,11 @@
           </div>
 
           <div class="column">
-            <%= form.number_field :txnprice, placeholder: 'Enter Price' %>
+            <%= form.number_field :txnprice, placeholder: 'Enter Price', step: '0.01' %>
           </div>
 
           <div class="column">
-            <%= form.number_field :qty, placeholder: 'Enter Qty' %>
+            <%= form.number_field :qty, placeholder: 'Enter Qty', step: '0.01' %>
           </div>
 
           <div class="column">
