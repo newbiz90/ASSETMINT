@@ -56,6 +56,7 @@ gem 'rest-client'
 
 # Added by Matthew Oh
 gem "devise"
+gem "httparty"
 
 group :development, :test do
   gem "dotenv-rails"
