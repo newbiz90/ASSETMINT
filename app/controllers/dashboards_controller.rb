@@ -31,9 +31,9 @@ class DashboardsController < ApplicationController
     prompt += "\nSummarize the above headlines into a passage of not more than 50 words.\n"
 
     # Calling OpenAI service to generate a summary
-    summary_response = OpenaiApiClient.create_chat(prompt)
-
-    # Extracting the summary from the response
-    @summary = summary_response["choices"].first["message"]["content"]
+    @summary = Rails.cache.fetch("openai_summary", expires_in: 4.hour) do
+      summary_response = OpenaiApiClient.create_chat(prompt)
+      summary_response["choices"].first["message"]["content"]
+    end
   end
 end
