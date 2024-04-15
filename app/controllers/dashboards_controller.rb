@@ -4,7 +4,7 @@ class DashboardsController < ApplicationController
   def show
     @user = current_user
     @transaction = Transaction.new
-    @usertxns = Transaction.joins(:user_ticker).where(user_ticker: { user: current_user })
+    @usertxns = current_user.transactions
     @alltickers = Ticker.all
     @usertickers = UserTicker.includes(:ticker).all
     @txn_count = 0
