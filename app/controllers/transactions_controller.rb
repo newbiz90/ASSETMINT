@@ -21,7 +21,7 @@ class TransactionsController < ApplicationController
 
     if @transaction.save
       flash[:notice] = 'Transaction was successfully created.'
-      redirect_to dashboard_path
+      redirect_to request.referer
     else
       flash.now[:alert] = 'Transaction could not be created.'
       render :new
@@ -33,7 +33,7 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.find(params[:id])
     @transaction.destroy
     flash[:notice] = 'Transaction was successfully destroyed.'
-    redirect_to dashboard_path
+    redirect_to request.referer
   end
 
   private

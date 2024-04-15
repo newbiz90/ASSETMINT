@@ -1,34 +1,35 @@
-<h2>Following</h2>
+<h2>Following Transactions</h2>
 
-<% if @transactions.any? %>
-  <table>
-    <thead>
-      <tr>
-        <th>Company Name</th>
-        <th>Ticker Symbol</th>
-        <th>Entry Date</th>
-        <th>Entry Price</th>
-        <th>Qty</th>
-        <th>Current Price</th>
-        <th>P/L</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @transactions.each do |transaction| %>
+<% if @user %>
+  <h3>Transactions for <%= @user.email %></h3>
+  <% if @transactions.any? %>
+    <table>
+      <thead>
         <tr>
-          <td><%= transaction.user.email %></td>
-
-          <td><%= transaction.user_ticker.ticker.name %></td>
-          <%# <td><%= transaction.user_ticker.ticker.symbol %></td>
-          <td><%= transaction.txndate %></td>
-          <td><%= transaction.txnprice %></td>
-          <td><%= transaction.qty %></td>
-          <td><!-- need to implement logic to fetch the current price --></td>
-          <td><!-- need to implement P/L calculation logic here --></td>
+          <th>Ticker Symbol</th>
+          <th>Entry Date</th>
+          <th>Entry Price</th>
+          <th>Qty</th>
+          <th>Current Price</th>
+          <th>P/L</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @transactions.each do |transaction| %>
+          <tr>
+            <td><%= transaction.user_ticker.ticker.name %></td>
+            <td><%= transaction.txndate.strftime("%Y-%m-%d") %></td>
+            <td><%= number_to_currency(transaction.txnprice) %></td>
+            <td><%= transaction.qty %></td>
+            <td><%= number_to_currency(transaction.fetch_current_price) %></td>
+            <td><%= number_to_currency(transaction.calculate_pl) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No transactions found for <%= @user.email %>.</p>
+  <% end %>
 <% else %>
-  <p>No transactions found.</p>
+  <p>User not found.</p>
 <% end %>
