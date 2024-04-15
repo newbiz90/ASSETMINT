@@ -35,7 +35,7 @@
     </table>
     <!-- add the followed user count below the table -->
     <div class="mt-4" id="followed-user-count">
-      <h5>Followed Users Count: <%= @followed_user_count %></h5>
+      <h5>Followed Users Count: <%= current_user.subscriptions.length %></h5>
     </div>
   </div>
 </div>
