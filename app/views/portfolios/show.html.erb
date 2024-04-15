@@ -17,7 +17,7 @@
       <%= @summary %>
     </p>
   </div>
-  
+
   <%= simple_form_for :search, url: portfolio_path(current_user), method: :get, html: { class: "mb-3", style: "margin-top: 2rem" } do |f| %>
     <%= f.input :ticker_name, label: 'Search by Ticker', input_html: { class: 'form-control' }, label: false %>
     <%= f.button :submit, "Search", class: "btn btn-primary" %>
@@ -42,32 +42,23 @@
         <!-- New Entry Form -->
         <div class="transaction <%= @txn_count.odd? ? 'odd-transaction' : 'even-transaction' %>">
           <div class="column">
-            <%= form.text_field :flow, list: 'flow-options', placeholder: 'Buy or Sell' %>
-            <datalist id="flow-options">
-              <option value="Buy">
-              <option value="Sell">
-            </datalist>
+            <%= form.select :flow, ["Buy", "Sell"], {prompt: "Select Flow"}, required: true, class: "form-select ms-3" %>
           </div>
 
           <div class="column">
-            <%= form.text_field :ticker_id, id: 'ticker-autocomplete', placeholder: 'Enter Ticker', list: 'tickers-list' %>
-            <datalist id="tickers-list">
-              <% @alltickers.each do |ticker| %>
-                <option value="<%= ticker.name %>">
-              <% end %>
-            </datalist>
+            <%= form.select :ticker_id, @alltickers.map { |ticker| ticker.name }, {id: 'ticker-autocomplete',prompt: "Select Ticker"}, class: "form-select mx-3", required: true %>
           </div>
 
           <div class="column">
-            <%= form.date_field :txndate, value: Date.today.strftime('%Y-%m-%d'), class: 'form-control' %>
+            <%= form.date_field :txndate, value: Date.today.strftime('%Y-%m-%d'), class: 'form-control', required: true %>
           </div>
 
           <div class="column">
-            <%= form.number_field :txnprice, placeholder: 'Enter Price', step: '0.01' %>
+            <%= form.number_field :txnprice, placeholder: 'Enter Price', step: '0.01', required: true %>
           </div>
 
           <div class="column">
-            <%= form.number_field :qty, placeholder: 'Enter Qty', step: '0.01' %>
+            <%= form.number_field :qty, placeholder: 'Enter Qty', step: '0.01', required: true %>
           </div>
 
           <div class="column">
