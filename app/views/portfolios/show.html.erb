@@ -1,5 +1,3 @@
-<%# <%= javascript_include_tag 'watchlist' %>
-
 <div class="container">
   <h3 id="table-title">All User<%=params[:id]%>'s Transactions</h3>
 
@@ -11,7 +9,7 @@
       <%= @summary %>
     </p>
   </div>
-  
+
   <%= simple_form_for :search, url: "search_path", method: :get, html: { class: "mb-3", style: "margin-top: 2rem" } do |f| %>
     <%= f.input :ticker_name, label: 'Search by Ticker', input_html: { class: 'form-control' }, label: false %>
   <% end %>
@@ -25,7 +23,7 @@
         <div class="column">Price</div>
         <div class="column">Quantity</div>
         <% if current_user != @user%>
-          <div class="column"></div>
+          <div class="column">Follow!</div>
         <% else %>
           <div class="column">Action</div>
         <% end %>
@@ -93,12 +91,12 @@
       <% end %>
     </div>
 
-<%= javascript_include_tag 'watchlist' %>
 
-<script>
+
+
+<%# <script>
   var otherUser = <%= raw @user.to_json %>;
-  var countHeart = 0;
-  allHearts.forEach(heart => {
+  <%# var countHeart = 0; %>
+  <%# allHearts.forEach(heart => {
     console.log("hello");
-  });
-</script>
+  }); %>

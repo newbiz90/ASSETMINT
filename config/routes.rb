@@ -40,4 +40,7 @@ Rails.application.routes.draw do
 
   # get sub by email
   get 'subscriptions/following', to: 'subscriptions#following'
+
+  # For logged-in user to view other user portfolios
+  get 'users/:id', to: 'portfolios#show'
   end
