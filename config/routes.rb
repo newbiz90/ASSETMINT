@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   resources :subscriptions, only: [:create, :destroy]
   get "following", to: "subscriptions#following"
 
+  # Nested routes for subscriptions associated with transactions
+  resources :subscriptions, only: [:show, :create, :destroy]
+  get "watchlist", to: "watchlist#show"
+
   # Nested routes for transactions associated with users
   resources :transactions, only: [:index, :create, :update, :destroy]
 
