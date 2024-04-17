@@ -10,14 +10,15 @@
         </tr>
       </thead>
       <tbody>
-        <% existing_subscription = current_user.subscriptions %>
+        <% existing_user_subscriptions = current_user.subscriptions.filter { |subscription| subscription.subscribable_type == "User" } %>
         <% @users.each do |user| %>
           <% unless user == current_user %>
             <tr>
               <td><%= user.email %></td>
               <td>
-                <% if existing_subscription.present? %>
-                  <%= form_with(model: existing_subscription, url: subscription_path(existing_subscription), method: :delete, local: true) do |form| %>
+                <% subscription = existing_user_subscriptions.find { |subscription| subscription.subscribable_id == user.id } %>
+                <% if subscription %>
+                  <%= form_with(model: subscription, url: subscription_path(subscription), method: :delete, local: true) do |form| %>
                     <%= form.submit "Unfollow", class: "btn btn-sm btn-danger", data: { disable_with: "Unfollowing..." } %>
                   <% end %>
                 <% else %>
