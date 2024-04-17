@@ -25,6 +25,16 @@
 
   <%= render partial: 'shared/txn_table' %>
 
+  <div class="digg_pagination">
+    <div class="page_info">
+      <%= page_entries_info @usertxns %>
+    </div>
+    <div class="d-flex justify-content-center">
+      <%= will_paginate @usertxns %>
+    </div>
+  </div>
+
+
 <%= javascript_include_tag 'watchlist' %>
 
 <script>

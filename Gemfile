@@ -58,6 +58,8 @@ gem 'rest-client'
 gem "devise"
 gem "httparty"
 
+gem 'will_paginate', '~> 4.0'
+
 group :development, :test do
   gem "dotenv-rails"
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
