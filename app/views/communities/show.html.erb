@@ -10,12 +10,12 @@
         </tr>
       </thead>
       <tbody>
+        <% existing_subscription = current_user.subscriptions %>
         <% @users.each do |user| %>
           <% unless user == current_user %>
             <tr>
               <td><%= user.email %></td>
               <td>
-                <% existing_subscription = Subscription.find_by(subscribable_type: 'User', subscribable_id: user.id, user_id: current_user.id) %>
                 <% if existing_subscription.present? %>
                   <%= form_with(model: existing_subscription, url: subscription_path(existing_subscription), method: :delete, local: true) do |form| %>
                     <%= form.submit "Unfollow", class: "btn btn-sm btn-danger", data: { disable_with: "Unfollowing..." } %>
@@ -35,7 +35,7 @@
     </table>
     <!-- add the followed user count below the table -->
     <div class="mt-4" id="followed-user-count">
-      <h5>Followed Users Count: <%= @followed_user_count %></h5>
+      <h5>Followed Users Count: <%= current_user.subscriptions.length %></h5>
     </div>
   </div>
 </div>
