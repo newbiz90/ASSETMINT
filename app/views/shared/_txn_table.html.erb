@@ -63,7 +63,7 @@
                     <%= form.hidden_field :subscribable_type, value: "UserTicker" %>
                     <%= form.hidden_field :subscribable_id, value: txn.id %>
                     <%# <% raise %>
-                    <%= form.submit class: "btn fa-regular fa-heart" %>
+                    <%= form.submit "Follow", class: "btn btn-sm btn-primary" %>
               <% end %>
           <% end %>
         </div>

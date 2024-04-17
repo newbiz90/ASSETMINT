@@ -1,9 +1,9 @@
 class WatchlistController < ApplicationController
   def show
+    raise
+    # @followedtickers =
   end
 
   def followtickerform
-    @newticker = Subscription.new
-    raise
   end
 end
