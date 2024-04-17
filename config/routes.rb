@@ -9,6 +9,12 @@ Rails.application.routes.draw do
   resources :subscriptions, only: [:create, :destroy]
   get "following", to: "subscriptions#following"
 
+  # Nested routes for subscriptions associated with transactions
+  resources :subscriptions, only: [:show, :create, :destroy]
+  get 'watchlist', to: 'watchlist#show'
+  get "followtickerform", to: "watchlist#followtickerform"
+
+
   # Nested routes for transactions associated with users
   resources :transactions, only: [:index, :create, :update, :destroy]
 
@@ -40,4 +46,7 @@ Rails.application.routes.draw do
 
   # get sub by email
   get 'subscriptions/following', to: 'subscriptions#following'
+
+  # For logged-in user to view other user portfolios
+  get 'users/:id', to: 'portfolios#show'
   end

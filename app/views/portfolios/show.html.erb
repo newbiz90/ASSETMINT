@@ -1,5 +1,3 @@
-<%# <%= javascript_include_tag 'watchlist' %>
-
 <% if @usertxns.empty? && params[:search].present? %>
   <div class="alert alert-warning" role="alert">
     No transactions found for the specified ticker.
@@ -24,13 +22,3 @@
   <% end %>
 
   <%= render partial: 'shared/txn_table' %>
-
-<%= javascript_include_tag 'watchlist' %>
-
-<script>
-  var otherUser = <%= raw @user.to_json %>;
-  var countHeart = 0;
-  allHearts.forEach(heart => {
-    console.log("hello");
-  });
-</script>
