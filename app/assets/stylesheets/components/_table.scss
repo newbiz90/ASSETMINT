@@ -1,0 +1,34 @@
+// File: app/assets/stylesheets/components/tables.scss
+
+.table .header-style {
+  background-color: #BBEDE1;
+  color: black;
+}
+
+
+.table td {
+  font-weight: bold;
+}
+
+
+.table {
+  tr:nth-child(odd) {
+    background-color: #fff;
+  }
+  tr:nth-child(even) {
+    background-color: #BBEDE1;
+  }
+}
+
+.table .email-column {
+  font-weight: normal;
+}
+
+// New styles for txn-table
+.txn-table {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  overflow: hidden;
+  margin-top: 20px;
+  border: 2px solid #4B7F73;
+  border-radius: 8px;
+}

@@ -1,19 +1,19 @@
 <h1>Community</h1>
 
 <div class="row justify-content-center">
-  <div class="col-md-7">
-    <table class="table">
+  <div class="col-md-6">
+    <table class="table txn-table">
       <thead>
         <tr>
-          <th>User</th>
-          <th>Actions</th>
+          <th class="header-style">User008</th>
+          <th class="header-style">Actions</th>
         </tr>
       </thead>
       <tbody>
         <% @users.each do |user| %>
           <% unless user == current_user %>
             <tr>
-              <td><%= user.email %></td>
+              <td class="email-column"><%= user.email %></td>
               <td>
                 <% existing_subscription = Subscription.find_by(subscribable_type: 'User', subscribable_id: user.id, user_id: current_user.id) %>
                 <% if existing_subscription.present? %>
@@ -39,3 +39,4 @@
     </div>
   </div>
 </div>
+ap
