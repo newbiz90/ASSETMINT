@@ -1,0 +1,73 @@
+<div class="txn-table">
+  <!-- Existing Transactions -->
+  <div class="table-header">
+    <div class="column">Flow</div>
+    <div class="column">Ticker</div>
+    <div class="column">Date</div>
+    <div class="column">Price</div>
+    <div class="column">Quantity</div>
+    <% if current_user != @user%>
+      <div class="column">Follow!</div>
+    <% else %>
+      <div class="column">Action</div>
+    <% end %>
+  </div>
+
+  <%= form_with(model: @transaction, url: transactions_path(current_user), method: :post, html: { id: 'transaction-form' }) do |form| %>
+    <!-- New Entry Form -->
+    <div class="transaction <%= @txn_count.odd? ? 'odd-transaction' : 'even-transaction' %>">
+      <div class="column">
+        <%= form.select :flow, ["Buy", "Sell"], {prompt: "Select Flow"}, required: true, class: "form-select ms-3" %>
+      </div>
+
+      <div class="column">
+        <%= form.select :ticker_id, @alltickers.map { |ticker| ticker.name }, {id: 'ticker-autocomplete',prompt: "Select Ticker"}, class: "form-select mx-3", required: true %>
+      </div>
+
+      <div class="column">
+        <%= form.date_field :txndate, value: Date.today.strftime('%Y-%m-%d'), class: 'form-control', required: true %>
+      </div>
+
+      <div class="column">
+        <%= form.number_field :txnprice, placeholder: 'Enter Price', step: '0.01', required: true %>
+      </div>
+
+      <div class="column">
+        <%= form.number_field :qty, placeholder: 'Enter Qty', step: '0.01', required: true %>
+      </div>
+
+      <div class="column">
+        <%= form.submit "+", class: 'plus-sign' %>
+      </div>
+
+    </div>
+  <% end if @user == current_user %>
+
+  <% @usertxns.each do |txn| %>
+    <% @txn_count += 1 %>
+    <%= form_with(url: transaction_path(txn), method: :delete) do |form| %>
+      <div class="transaction <%= @txn_count.odd? ? 'odd-transaction' : 'even-transaction' %>">
+        <% usertxnticker = @usertickers.find(txn.user_ticker_id) %>
+        <% ticker = @alltickers.find(usertxnticker.ticker_id) %>
+        <div class="column"><%= txn.flow %></div>
+        <div class="column"><%= ticker.name %></div>
+        <div class="column"><%= txn.txndate.strftime('%d/%m/%Y') %></div>
+        <div class="column"><%= txn.txnprice %></div>
+        <div class="column"><%= txn.qty %></div>
+        <div class="column">
+          <% if current_user == @user%>
+            <%= form.submit "-", class: "minus-sign" %>
+          <% else %>
+            <%# <span style=""><i data-controller="watchlist" data-action="click->watchlist#follow" class="fa-regular fa-heart"></i></span> %>
+              <%= form_with(model: Subscription.new, url: subscriptions_path, method: :post, local: true) do |form| %>
+                    <%= form.hidden_field :subscribable_type, value: "UserTicker" %>
+                    <%= form.hidden_field :subscribable_id, value: txn.id %>
+                    <%# <% raise %>
+                    <%= form.submit class: "btn fa-regular fa-heart" %>
+              <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

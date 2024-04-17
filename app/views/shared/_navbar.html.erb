@@ -36,7 +36,7 @@
         "></div>
         <%= link_to 'dashboard', dashboard_path, style: "padding: 0.5rem; color: #{current_page?(dashboard_path) ? '#4B7F73' : '#b3b3b3'}" %>
         <%= link_to 'portfolio', portfolio_path(current_user), style: "padding: 0.5rem; color: #{current_page?(portfolio_path(current_user)) ? '#4B7F73' : '#b3b3b3'}" %>
-        <%= link_to 'following', following_path, style: "padding: 0.5rem; color: #{ current_page?(following_path) ? "#4B7F73" : "#b3b3b3" }" %>
+        <%= link_to 'watchlist', watchlist_path, style: "padding: 0.5rem; color: #{ current_page?(watchlist_path) ? "#4B7F73" : "#b3b3b3" }" %>
         <%= link_to 'community', community_path, style: "padding: 0.5rem; color: #{ current_page?(community_path) ? "#4B7F73" : "#b3b3b3" }" %>
       </div>
     </div>
@@ -58,6 +58,6 @@
 </nav>
 
 <!-- Add padding to create space below the navigation bar -->
-<div style="padding-top: 3.5rem;"> <!-- Adjust the value as needed -->
+<div style="padding-top: 70px;"> <!-- Adjust the value as needed -->
   <!-- Your content goes here -->
 </div>
