@@ -1,3 +1,14 @@
+<<<<<<< HEAD
+=======
+<%# <%= javascript_include_tag 'watchlist' %>
+
+<% if @usertxns.empty? && params[:search].present? %>
+  <div class="alert alert-warning" role="alert">
+    No transactions found for the specified ticker.
+  </div>
+<% end %>
+
+>>>>>>> 3712235ada9efd4c6a24ce1500610edc68e75cce
 <div class="container">
   <h3 id="table-title">All User<%=params[:id]%>'s Transactions</h3>
 
@@ -10,10 +21,16 @@
     </p>
   </div>
 
+<<<<<<< HEAD
   <%= simple_form_for :search, url: "search_path", method: :get, html: { class: "mb-3", style: "margin-top: 2rem" } do |f| %>
+=======
+  <%= simple_form_for :search, url: portfolio_path(current_user), method: :get, html: { class: "mb-3", style: "margin-top: 2rem" } do |f| %>
+>>>>>>> 3712235ada9efd4c6a24ce1500610edc68e75cce
     <%= f.input :ticker_name, label: 'Search by Ticker', input_html: { class: 'form-control' }, label: false %>
+    <%= f.button :submit, "Search", class: "btn btn-primary" %>
   <% end %>
 
+<<<<<<< HEAD
   <div class="txn-table">
       <!-- Existing Transactions -->
       <div class="table-header">
@@ -93,6 +110,9 @@
         <% end %>
       <% end %>
     </div>
+=======
+  <%= render partial: 'shared/txn_table' %>
+>>>>>>> 3712235ada9efd4c6a24ce1500610edc68e75cce
 
 
 
