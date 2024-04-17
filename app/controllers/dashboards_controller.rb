@@ -4,7 +4,7 @@ class DashboardsController < ApplicationController
   def show
     @user = current_user
     @transaction = Transaction.new
-    @usertxns = current_user.transactions
+    @usertxns = current_user.transactions.limit(5)
     @alltickers = Ticker.all
     @usertickers = UserTicker.includes(:ticker).all
     @txn_count = 0
