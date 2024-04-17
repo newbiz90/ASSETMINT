@@ -1,14 +1,9 @@
-<<<<<<< HEAD
-=======
-<%# <%= javascript_include_tag 'watchlist' %>
-
 <% if @usertxns.empty? && params[:search].present? %>
   <div class="alert alert-warning" role="alert">
     No transactions found for the specified ticker.
   </div>
 <% end %>
 
->>>>>>> 3712235ada9efd4c6a24ce1500610edc68e75cce
 <div class="container">
   <h3 id="table-title">All User<%=params[:id]%>'s Transactions</h3>
 
@@ -21,105 +16,9 @@
     </p>
   </div>
 
-<<<<<<< HEAD
-  <%= simple_form_for :search, url: "search_path", method: :get, html: { class: "mb-3", style: "margin-top: 2rem" } do |f| %>
-=======
   <%= simple_form_for :search, url: portfolio_path(current_user), method: :get, html: { class: "mb-3", style: "margin-top: 2rem" } do |f| %>
->>>>>>> 3712235ada9efd4c6a24ce1500610edc68e75cce
     <%= f.input :ticker_name, label: 'Search by Ticker', input_html: { class: 'form-control' }, label: false %>
     <%= f.button :submit, "Search", class: "btn btn-primary" %>
   <% end %>
 
-<<<<<<< HEAD
-  <div class="txn-table">
-      <!-- Existing Transactions -->
-      <div class="table-header">
-        <div class="column">Flow</div>
-        <div class="column">Ticker</div>
-        <div class="column">Date</div>
-        <div class="column">Price</div>
-        <div class="column">Quantity</div>
-        <% if current_user != @user%>
-          <div class="column">Follow!</div>
-        <% else %>
-          <div class="column">Action</div>
-        <% end %>
-      </div>
-
-      <%= form_with(model: @transaction, url: transactions_path(current_user), method: :post, html: { id: 'transaction-form' }) do |form| %>
-        <!-- New Entry Form -->
-        <div class="transaction <%= @txn_count.odd? ? 'odd-transaction' : 'even-transaction' %>">
-          <div class="column">
-            <%= form.text_field :flow, list: 'flow-options', placeholder: 'Buy or Sell' %>
-            <datalist id="flow-options">
-              <option value="Buy">
-              <option value="Sell">
-            </datalist>
-          </div>
-
-          <div class="column">
-            <%= form.text_field :ticker_id, id: 'ticker-autocomplete', placeholder: 'Enter Ticker', list: 'tickers-list' %>
-            <datalist id="tickers-list">
-              <% @alltickers.each do |ticker| %>
-                <option value="<%= ticker.name %>">
-              <% end %>
-            </datalist>
-          </div>
-
-          <div class="column">
-            <%= form.date_field :txndate, value: Date.today.strftime('%Y-%m-%d'), class: 'form-control' %>
-          </div>
-
-          <div class="column">
-            <%= form.number_field :txnprice, placeholder: 'Enter Price', step: '0.01' %>
-          </div>
-
-          <div class="column">
-            <%= form.number_field :qty, placeholder: 'Enter Qty', step: '0.01' %>
-          </div>
-
-          <div class="column">
-            <%= form.submit "+", class: 'plus-sign' %>
-          </div>
-
-        </div>
-      <% end if @user == current_user %>
-
-      <% @usertxns.each do |txn| %>
-        <% @txn_count += 1 %>
-        <%= form_with(url: transaction_path(txn), method: :delete) do |form| %>
-          <div class="transaction <%= @txn_count.odd? ? 'odd-transaction' : 'even-transaction' %>">
-            <% usertxnticker = @usertickers.find(txn.user_ticker_id) %>
-            <% ticker = @alltickers.find(usertxnticker.ticker_id) %>
-            <div class="column"><%= txn.flow %></div>
-            <div class="column"><%= ticker.name %></div>
-            <div class="column"><%= txn.txndate.strftime('%d/%m/%Y') %></div>
-            <div class="column"><%= txn.txnprice %></div>
-            <div class="column"><%= txn.qty %></div>
-            <div class="column">
-                <% if current_user == @user%>
-                  <%= form.submit "-", class: "minus-sign" %>
-                <% else %>
-                  <span style=""><i data-controller="watchlist"
-                                    data-action="click->watchlist#follow"
-                                    data-user-ticker-id="<% txn.user_ticker_id %>"
-                                    class="fa-regular fa-heart"></i></span>
-                <% end %>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
-    </div>
-=======
   <%= render partial: 'shared/txn_table' %>
->>>>>>> 3712235ada9efd4c6a24ce1500610edc68e75cce
-
-
-
-
-<%# <script>
-  var otherUser = <%= raw @user.to_json %>;
-  <%# var countHeart = 0; %>
-  <%# allHearts.forEach(heart => {
-    console.log("hello");
-  }); %>

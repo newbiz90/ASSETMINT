@@ -6,13 +6,13 @@ export default class extends Controller {
   }
 
   follow() {
-    // console.log("click logged!")
-
     let thisheart = this.element;
     if (thisheart.classList.contains("fa-regular")) {
       thisheart.classList.remove("fa-regular");
       thisheart.classList.add("fa-solid");
-      console.log("Now Following!");
+      console.log("Now Following!:)");
+
+
 
     } else {
       thisheart.classList.remove("fa-solid");
