@@ -1,34 +1,71 @@
 // File: app/assets/stylesheets/components/tables.scss
 
-.table .header-style {
-  background-color: #BBEDE1;
+
+
+.header-style {
+  background-color: #BBEDE1;  // Existing green color
   color: black;
+  text-align: center;
+  font-weight: normal;  // Make header bold as requested
+  padding: 8px;  // Adds padding to header cells
+}
+
+.email-column {
+  font-weight: normal;  // Make sure email font is not bold
+  padding: 6px;
+  text-align: center;
 }
 
 
-.table td {
-  font-weight: bold;
+.action-column {
+  text-align: center;  // This should center the button text
+  display: flex;
+  justify-content: center;  // This centers the button within the column
+  align-items: center;  // This ensures the button is centered vertically if there's more vertical space
+  padding: 6px;
+}
+
+.action-column > * {  // Ensuring all direct children of action-column are centered
+  flex: 1 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.action-column form {
+  display: flex;
+  justify-content: center;  // Center form content horizontally
+  align-items: center;  // Center form content vertically
+  width: 100%;  // Form takes full width of its container
+}
+
+.action-column form button {
+  width: auto;  // Keeps the button width automatically determined by its content
+  margin: 0 auto;
 }
 
 
-.table {
-  tr:nth-child(odd) {
-    background-color: #fff;
-  }
-  tr:nth-child(even) {
-    background-color: #BBEDE1;
-  }
+.even-row {
+  background-color: #e4f8f3;  // Existing apple green for even rows
+  padding: 6px;  // Adds padding to each row
+
 }
 
-.table .email-column {
-  font-weight: normal;
+.odd-row {
+  background-color: #fff;  // White for odd rows
+  padding: 6px;  // Adds padding to each row
+
+}
+.row {
+  margin-left: 0;
+  margin-right: 0;
 }
 
-// New styles for txn-table
-.txn-table {
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  overflow: hidden;
-  margin-top: 20px;
-  border: 2px solid #4B7F73;
-  border-radius: 8px;
+form {
+  width: 100%;  // Ensure the form takes up the full column width
+}
+
+form button {
+  width: auto;  // Ensure the button width is automatically determined by its content
+  margin: 0 auto;  // Auto margins can also help in centering
 }
