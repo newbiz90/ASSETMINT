@@ -4,7 +4,7 @@
   <div class="txn-table">
     <!-- Header Row -->
     <div class="header-row row"> <!-- Use Bootstrap's row class -->
-      <div class="header-style email-column col-sm-3">USER_TESTING_004</div>
+      <div class="header-style email-column col-sm-3">USER</div>
       <div class="header-style action-column col-sm-3">Actions</div>
     </div>
 
@@ -36,6 +36,12 @@
   </div>
 </div>
 
-<div class="mt-4" id="followed-user-count">
-  <h5>Followed Users Count: <%= current_user.subscriptions.length %></h5>
+  <!-- Followed Users Count in a styled div -->
+  <div class="mt-4 row">
+    <div class="col-sm-3">
+      <div id="followed-user-count">
+        <h5>Followed Users Count: <%= current_user.subscriptions.length %></h5>
+      </div>
+    </div>
+  </div>
 </div>
