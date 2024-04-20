@@ -1,43 +1,37 @@
 <h1>Community</h1>
 
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <!-- Header -->
-      <div class="row header-style">
-        <div class="col-md-6">User007</div>
-        <div class="col-md-6">Actions</div>
-      </div>
-
-      <!-- User Rows -->
-      <% row_counter = 0 %> <!-- Initialize the counter before the loop -->
-      <% @users.each do |user| %>
-        <% unless user == current_user %>
-          <% row_class = row_counter.even? ? 'even-row' : 'odd-row' %>
-          <div class="row <%= row_class %>">
-            <div class="col-md-6 email-column"><%= user.email %></div>
-            <div class="col-md-6">
-              <% subscription = current_user.subscriptions.find { |sub| sub.subscribable_type == "User" && sub.subscribable_id == user.id } %>
-            <div class="col-md-6 action-column">
-              <% if subscription %>
-                <%= form_with(model: subscription, url: subscription_path(subscription), method: :delete, local: true) do |form| %>
-                  <%= form.submit "Unfollow", class: "btn btn-sm btn-danger", data: { disable_with: "Unfollowing..." } %>
-                <% end %>
-              <% else %>
-                <%= form_with(model: Subscription.new, url: subscriptions_path, method: :post, local: true) do |form| %>
-                  <%= form.hidden_field :subscribable_type, value: "User" %>
-                  <%= form.hidden_field :subscribable_id, value: user.id %>
-                  <%= form.submit "Follow", class: "btn btn-sm btn-primary", data: { disable_with: "Following..." } %>
-                <% end %>
-              <% end %>
-              </div>
-            </div>
-          </div>
-          <% row_counter += 1 %> <!-- Increment counter here inside the unless block -->
-        <% end %>
-      <% end %>
-    </div>
+<div class="txn-table">
+  <!-- Header Row -->
+  <div class="header-row">
+    <div class="header-style email-column">USER</div>
+    <div class="header-style action-column">Actions</div>
   </div>
+
+  <!-- Dynamic User Rows -->
+  <% row_counter = 0 %> <!-- Initialize the counter before the loop -->
+  <% @users.each do |user| %>
+    <% unless user == current_user %>
+      <% row_class = row_counter.even? ? 'even-row' : 'odd-row' %>
+      <div class="row <%= row_class %>">
+        <div class="email-column"><%= user.email %></div>
+        <div class="action-column">
+          <% subscription = current_user.subscriptions.find { |sub| sub.subscribable_type == "User" && sub.subscribable_id == user.id } %>
+          <% if subscription %>
+            <%= form_with(model: subscription, url: subscription_path(subscription), method: :delete, local: true) do |form| %>
+              <%= form.submit "Unfollow", class: "btn btn-sm btn-danger", data: { disable_with: "Unfollowing..." } %>
+            <% end %>
+          <% else %>
+            <%= form_with(model: Subscription.new, url: subscriptions_path, method: :post, local: true) do |form| %>
+              <%= form.hidden_field :subscribable_type, value: "User" %>
+              <%= form.hidden_field :subscribable_id, value: user.id %>
+              <%= form.submit "Follow", class: "btn btn-sm btn-primary", data: { disable_with: "Following..." } %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <% row_counter += 1 %> <!-- Increment counter here inside the unless block -->
+    <% end %>
+  <% end %>
 </div>
 
 <div class="mt-4" id="followed-user-count">
