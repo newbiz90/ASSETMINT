@@ -14,3 +14,15 @@ $headers-font: "Nunito", "Helvetica", "sans-serif";
 //        font-url('FontFile.ttf') format('truetype')
 // }
 // $my-font: "Font Name";
+
+// Add custom styles for community-title
+#community-title {
+  font-size: 16.8px;  // Use a specific size to match your design needs
+  font-weight: 500;  // Medium weight for better readability
+  line-height: 20.1667px;  // Specific line height for proper text display
+  color: rgb(75, 127, 115);  // Custom color
+  font-family: "Nunito", "Helvetica", "sans-serif";  // Use the header font
+  margin-top: 0px;  // No top margin
+  margin-bottom: 7px;  // Small bottom margin
+  text-align: start;  // Align text to the start of the element
+}

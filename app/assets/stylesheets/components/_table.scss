@@ -1,3 +1,5 @@
+
+
 // File: app/assets/stylesheets/components/tables.scss
 
 /* Existing Header Styles */
@@ -8,6 +10,13 @@
   font-weight: normal;  // Make header bold as requested
   padding: 8px;  // Adds padding to header cells
 }
+
+/* Apply flex properties only to non-header rows */
+.txn-table .row:not(.header-row) .email-column,
+.txn-table .row:not(.header-row) .action-column {
+  flex: 1;
+}
+
 
 /* Updated Email Column Styles */
 .email-column {
@@ -101,17 +110,22 @@ form button {
   margin: 0 auto;
 }
 
+// File: app/assets/stylesheets/components/tables.scss
+
+// Custom styles for followed-user-count to match community-title
 #followed-user-count {
   border: 1px solid #4B7F73;
   border-radius: 4px;
   padding: 4px;
   font-weight: normal;
-  text-align: left;
+  text-align: start; // Align text to start similar to community-title
+  color: rgb(75, 127, 115); // Use the same color as community-title
+  font-family: "Nunito", "Helvetica", "sans-serif"; // Maintain font consistency
 }
 
-/* Ensure h5 within #followed-user-count uses the specified styles */
 #followed-user-count h5 {
-  font-size: 1.25rem; /* Standard h5 font size */
-  font-weight: normal;
-  text-align: left;
+  font-size: 16.8px; // Match the font size used for community-title
+  line-height: 20.1667px; // Keep line height consistent
+  margin-top: 0px; // Remove top margin
+  margin-bottom: 7px; // Set bottom margin
 }

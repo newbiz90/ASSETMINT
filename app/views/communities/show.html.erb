@@ -1,10 +1,15 @@
-<h1>Community</h1>
 
-<div class="container"> <!-- Bootstrap's container class for proper padding and responsiveness -->
+
+<div class="container">
+ <div class="row">
+    <div class="col-sm-3">
+      <h1 id="community-title">Community</h1>
+    </div>
+  </div>
   <div class="txn-table">
     <!-- Header Row -->
     <div class="header-row row"> <!-- Use Bootstrap's row class -->
-      <div class="header-style email-column col-sm-3">USER</div>
+      <div class="header-style email-column col-sm-3">USER_Col_Test_6</div>
       <div class="header-style action-column col-sm-3">Actions</div>
     </div>
 
@@ -36,11 +41,10 @@
   </div>
 </div>
 
-  <!-- Followed Users Count in a styled div -->
   <div class="mt-4 row">
-    <div class="col-sm-3">
+    <div class="col-sm-2">
       <div id="followed-user-count">
-        <h5>Followed Users Count: <%= current_user.subscriptions.length %></h5>
+        <h6>Followed Users Count: <%= current_user.subscriptions.length %></h6>
       </div>
     </div>
   </div>
