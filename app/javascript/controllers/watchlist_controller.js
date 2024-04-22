@@ -7,7 +7,7 @@ export default class extends Controller {
   }
 
   connect() {
-    console.log(this.userTickerIdValue);
+    // console.log(this.userTickerIdValue);
   }
 
   follow() {
@@ -50,8 +50,34 @@ export default class extends Controller {
     } else {
       thisheart.classList.remove("fa-solid");
       thisheart.classList.add("fa-regular");
-      console.log("Unfollowed :(");
+      // console.log("Unfollowed :(");
 
+      let userTickerId = this.userTickerIdValue;
+      let url = `/subscriptions/${userTickerId}`
+
+      var token = document.querySelector('meta[name="csrf-token"]').content
+
+      fetch(url, {
+        method: 'DELETE',
+        body: JSON.stringify({
+          "authenticity_token": token,
+          "subscription": {
+            "subscription_id": userTickerId
+          }
+        }), // Convert JSON object to string
+        headers: {
+          'Content-Type': 'application/json',
+          "Accept": "application/json"
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          console.log("Unfollowed")
+        } else {
+          console.log("Something wrong")
+        }
+      })
+      .catch(error => console.error('Error:', error));
     }
 
 
