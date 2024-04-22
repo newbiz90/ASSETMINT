@@ -58,13 +58,7 @@
           <% if current_user == @user%>
             <%= form.submit "-", class: "minus-sign" %>
           <% else %>
-            <%# <span style=""><i data-controller="watchlist" data-action="click->watchlist#follow" class="fa-regular fa-heart"></i></span> %>
-              <%= form_with(model: Subscription.new, url: subscriptions_path, method: :post, local: true) do |form| %>
-                    <%= form.hidden_field :subscribable_type, value: "UserTicker" %>
-                    <%= form.hidden_field :subscribable_id, value: txn.id %>
-                    <%# <% raise %>
-                    <%= form.submit "Follow", class: "btn btn-sm btn-primary" %>
-              <% end %>
+            <span style=""><i id="<% txn.user_ticker_id %>"data-controller="watchlist" data-action="click->watchlist#follow" class="fa-regular fa-heart"></i></span>
           <% end %>
         </div>
       </div>

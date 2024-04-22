@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :subscriptions, only: [:show, :create, :destroy]
   get 'watchlist', to: 'watchlist#show'
   get "followtickerform", to: "watchlist#followtickerform"
-
+  post 'subscribeticker', to: 'subscriptions#subscribeticker'
 
   # Nested routes for transactions associated with users
   resources :transactions, only: [:index, :create, :update, :destroy]
