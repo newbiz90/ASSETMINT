@@ -30,6 +30,21 @@ class SubscriptionsController < ApplicationController
     redirect_to community_path
   end
 
+  def subscribeticker
+    raise
+    subscribable = determine_subscribable(params[:subscription][:subscribable_type],
+                                          params[:subscription][:subscribable_id])
+    @subscription = Subscription.new(subscribable:, user: current_user)
+
+    if @subscription.save
+      flash[:notice] = 'Subscribed successfully!'
+    else
+      flash[:alert] = 'Subscription failed!'
+    end
+
+    # redirect_to community_path
+  end
+
   def destroy
     subscription = current_user.subscriptions.find_by(id: params[:id])
 
