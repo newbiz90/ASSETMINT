@@ -2,7 +2,12 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="watchlist"
 export default class extends Controller {
+  static values = {
+    userTickerId: String
+  }
+
   connect() {
+    console.log(this.userTickerIdValue);
   }
 
   follow() {
@@ -11,14 +16,23 @@ export default class extends Controller {
       thisheart.classList.remove("fa-regular");
       thisheart.classList.add("fa-solid");
 
-      let url = '/subscribeticker'
-      let userTickerId = thisheart.id;
+      let url = '/subscriptions'
+      let userTickerId = this.userTickerIdValue;
+
+      var token = document.querySelector('meta[name="csrf-token"]').content
 
       fetch(url, {
         method: 'POST',
-        body: JSON.stringify(userTickerId), // Convert JSON object to string
+        body: JSON.stringify({
+          "authenticity_token": token,
+          "subscription": {
+            "subscription_type": "UserTicker",
+            "subscription_id": userTickerId
+          }
+        }), // Convert JSON object to string
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          "Accept": "application/json"
         }
       })
       .then(response => {

@@ -26,8 +26,11 @@ class SubscriptionsController < ApplicationController
     else
       flash[:alert] = 'Subscription failed!'
     end
+    respond_to do |format|
+      format.html { redirect_to community_path }
 
-    redirect_to community_path
+      format.json  { render json: { msg: :ok } }
+    end
   end
 
   def subscribeticker
