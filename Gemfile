@@ -57,6 +57,7 @@ gem 'rest-client'
 # Added by Matthew Oh
 gem "devise"
 gem "httparty"
+gem "telegram-bot-ruby"
 
 group :development, :test do
   gem "dotenv-rails"

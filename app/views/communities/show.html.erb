@@ -1,42 +1,51 @@
-<h1>Community</h1>
 
-<div class="d-flex justify-content-center">
-  <div class="col-md-7">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>User</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% existing_user_subscriptions = current_user.subscriptions.filter { |subscription| subscription.subscribable_type == "User" } %>
-        <% @users.each do |user| %>
-          <% unless user == current_user %>
-            <tr>
-              <td><%= user.email %></td>
-              <td>
-                <% subscription = existing_user_subscriptions.find { |subscription| subscription.subscribable_id == user.id } %>
-                <% if subscription %>
-                  <%= form_with(model: subscription, url: subscription_path(subscription), method: :delete, local: true) do |form| %>
-                    <%= form.submit "Unfollow", class: "btn btn-sm btn-danger", data: { disable_with: "Unfollowing..." } %>
-                  <% end %>
-                <% else %>
-                  <%= form_with(model: Subscription.new, url: subscriptions_path, method: :post, local: true) do |form| %>
-                    <%= form.hidden_field :subscribable_type, value: "User" %>
-                    <%= form.hidden_field :subscribable_id, value: user.id %>
-                    <%= form.submit "Follow", class: "btn btn-sm btn-primary", data: { disable_with: "Following..." } %>
-                  <% end %>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        <% end %>
-      </tbody>
-    </table>
-    <!-- add the followed user count below the table -->
-    <div class="mt-4" id="followed-user-count">
-      <h5>Followed Users Count: <%= current_user.subscriptions.length %></h5>
+
+<div class="container">
+ <div class="row">
+    <div class="col-sm-3">
+      <h1 id="community-title">Community</h1>
+    </div>
+  </div>
+  <div class="txn-table">
+    <!-- Header Row -->
+    <div class="header-row row"> <!-- Use Bootstrap's row class -->
+      <div class="header-style email-column col-sm-3">USER_Col_Test_6</div>
+      <div class="header-style action-column col-sm-3">Actions</div>
+    </div>
+
+    <!-- Dynamic User Rows -->
+    <% row_counter = 0 %>
+    <% @users.each do |user| %>
+      <% unless user == current_user %>
+        <% row_class = row_counter.even? ? 'even-row' : 'odd-row' %>
+        <div class="row <%= row_class %>"> <!-- Use Bootstrap's row class for each user row -->
+          <div class="email-column col-sm-3"><%= user.email %></div> <!-- Bootstrap grid class -->
+          <div class="action-column col-sm-3"> <!-- Bootstrap grid class -->
+            <% subscription = current_user.subscriptions.find { |sub| sub.subscribable_type == "User" && sub.subscribable_id == user.id } %>
+            <% if subscription %>
+              <%= form_with(model: subscription, url: subscription_path(subscription), method: :delete, local: true) do |form| %>
+                <%= form.submit "Unfollow", class: "btn btn-sm btn-danger", data: { disable_with: "Unfollowing..." } %>
+              <% end %>
+            <% else %>
+              <%= form_with(model: Subscription.new, url: subscriptions_path, method: :post, local: true) do |form| %>
+                <%= form.hidden_field :subscribable_type, value: "User" %>
+                <%= form.hidden_field :subscribable_id, value: user.id %>
+                <%= form.submit "Follow", class: "btn btn-sm btn-primary", data: { disable_with: "Following..." } %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+        <% row_counter += 1 %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+  <div class="mt-4 row">
+    <div class="col-sm-2">
+      <div id="followed-user-count">
+        <h6>Followed Users Count: <%= current_user.subscriptions.length %></h6>
+      </div>
     </div>
   </div>
 </div>

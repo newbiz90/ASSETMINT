@@ -49,4 +49,5 @@ Rails.application.routes.draw do
 
   # For logged-in user to view other user portfolios
   get 'users/:id', to: 'portfolios#show'
-  end
+
+end

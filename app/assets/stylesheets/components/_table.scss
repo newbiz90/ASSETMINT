@@ -1,0 +1,131 @@
+
+
+// File: app/assets/stylesheets/components/tables.scss
+
+/* Existing Header Styles */
+.header-style {
+  background-color: #BBEDE1;  // Existing green color
+  color: black;
+  text-align: center;
+  font-weight: normal;  // Make header bold as requested
+  padding: 8px;  // Adds padding to header cells
+}
+
+/* Apply flex properties only to non-header rows */
+.txn-table .row:not(.header-row) .email-column,
+.txn-table .row:not(.header-row) .action-column {
+  flex: 1;
+}
+
+
+/* Updated Email Column Styles */
+.email-column {
+  font-weight: normal;  // Make sure email font is not bold
+  padding: 6px;  // Uniform padding with action column
+  text-align: center;
+  flex: 1;  // Flex property to take advantage of the flex container
+}
+
+/* Existing Borders for Email Column */
+.txn-table th.email-column,
+.txn-table td.email-column {
+  border-left: 2px solid #4B7F73; /* Adds a border to the left side of the email column */
+  border-right: 2px solid #4B7F73; /* Adds a border to the right side of the email column */
+}
+
+/* Updated Action Column Styles */
+.action-column {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px;  // Uniform padding with email column
+  flex: 1;  // Ensures flexbox properties are correctly applied
+}
+
+/* Specific Styles for Action Column Children */
+.action-column > * {
+  flex: 1 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Form within Action Column */
+.action-column form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* Button within Forms */
+.action-column form button {
+  width: auto;
+  margin: 0 auto;
+}
+
+/* Existing Row Styles */
+.even-row, .odd-row {
+  background-color: #e4f8f3;  // Alternating colors
+  padding: 6px;
+}
+
+.odd-row {
+  background-color: #fff;
+}
+
+/* New General Styles for .txn-table */
+.txn-table {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  overflow: hidden;
+  margin-top: 20px;
+  border: 2px solid #4B7F73;
+  border-radius: 8px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Flexbox Settings for Rows */
+.header-row, .row {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Ensure rows have no additional margins */
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* General Form Settings */
+form {
+  width: 100%;
+}
+
+/* Button within Form */
+form button {
+  width: auto;
+  margin: 0 auto;
+}
+
+// File: app/assets/stylesheets/components/tables.scss
+
+// Custom styles for followed-user-count to match community-title
+#followed-user-count {
+  border: 1px solid #4B7F73;
+  border-radius: 4px;
+  padding: 4px;
+  font-weight: normal;
+  text-align: start; // Align text to start similar to community-title
+  color: rgb(75, 127, 115); // Use the same color as community-title
+  font-family: "Nunito", "Helvetica", "sans-serif"; // Maintain font consistency
+}
+
+#followed-user-count h5 {
+  font-size: 16.8px; // Match the font size used for community-title
+  line-height: 20.1667px; // Keep line height consistent
+  margin-top: 0px; // Remove top margin
+  margin-bottom: 7px; // Set bottom margin
+}
