@@ -42,7 +42,26 @@ puts "Subscription 1 valid?: #{subscription1.valid?}"
 puts "Subscription 1 errors: #{subscription1.errors.full_messages}"
 subscription1.save
 
-# subscription2 = Subscription.new(subscribable: user2, user_ticker: user_ticker1)
+# Seed data for subscriptions
+subscription2 = Subscription.new(subscribable: user_ticker2, user: user2)
+puts "Subscription 2 valid?: #{subscription2.valid?}"
+puts "Subscription 2 errors: #{subscription2.errors.full_messages}"
+subscription2.save
+
+# Seed data for subscriptions
+subscription3 = Subscription.new(subscribable: user_ticker4, user: user1)
+puts "Subscription 3 valid?: #{subscription3.valid?}"
+puts "Subscription 3 errors: #{subscription3.errors.full_messages}"
+subscription3.save
+
+
+# Seed data for subscriptions
+subscription4 = Subscription.new(subscribable: user_ticker3, user: user1)
+puts "Subscription 4 valid?: #{subscription4.valid?}"
+puts "Subscription 4 errors: #{subscription4.errors.full_messages}"
+subscription4.save
+
+# subscription2 = Subscription.new(subscribable: user2, user_ticker: user_ticker2)
 # puts "Subscription 2 valid?: #{subscription2.valid?}"
 # puts "Subscription 2 errors: #{subscription2.errors.full_messages}"
 # subscription2.save
