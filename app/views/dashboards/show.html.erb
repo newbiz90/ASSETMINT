@@ -14,6 +14,10 @@
       </div>
       <div class="col-md-8">
         <%= render partial: 'transactions/index' %>
+
+        <% @peers_txns.each do |txn| %>
+          <%= render partial: 'transactions/user_txn', locals: { txn: txn } %>
+        <% end %>
       </div>
     </div>
   </div>

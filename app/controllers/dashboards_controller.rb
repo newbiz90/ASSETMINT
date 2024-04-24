@@ -34,5 +34,7 @@ class DashboardsController < ApplicationController
       summary_response = OpenaiApiClient.create_chat(prompt)
       summary_response["choices"].first["message"]["content"]
     end
+
+    @peers_txns = Transaction.where(user: current_user.following).includes(:user_ticker, :user)
   end
 end

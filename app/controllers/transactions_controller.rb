@@ -18,6 +18,7 @@ class TransactionsController < ApplicationController
     ticker = Ticker.find_or_create_by(name: ticker_name)
     @transaction = Transaction.new(transaction_params)
     @transaction.user_ticker = current_user.user_tickers.find_or_create_by(ticker: ticker)
+    @transaction.user = current_user
 
     if @transaction.save
       send_telegram_notification(current_user, @transaction)

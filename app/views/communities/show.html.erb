@@ -19,7 +19,9 @@
       <% unless user == current_user %>
         <% row_class = row_counter.even? ? 'even-row' : 'odd-row' %>
         <div class="row <%= row_class %>"> <!-- Use Bootstrap's row class for each user row -->
-          <div class="email-column col-sm-3"><%= user.email %></div> <!-- Bootstrap grid class -->
+          <div class="email-column col-sm-3">
+            <%= link_to user.email, portfolio_path(user) %>
+          </div> <!-- Bootstrap grid class -->
           <div class="action-column col-sm-3"> <!-- Bootstrap grid class -->
             <% subscription = current_user.subscriptions.find { |sub| sub.subscribable_type == "User" && sub.subscribable_id == user.id } %>
             <% if subscription %>
