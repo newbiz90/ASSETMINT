@@ -1,25 +1,43 @@
 class SubscriptionsController < ApplicationController
   def following
-    if params[:email]  # Check if email parameter is present
+    if params[:email] # Check if email parameter is present
       @user = User.find_by('lower(email) = ?', params[:email]&.downcase)
       if @user
         @transactions = @user.transactions.includes(user_ticker: :ticker)
       else
         @transactions = []
         flash[:alert] = "User not found."
-        redirect_to root_path  # Redirect somewhere appropriate if user not found
-        return  # Ensure we exit the method after the redirect to avoid further processing
+        redirect_to root_path # Redirect somewhere appropriate if user not found
+        return # Ensure we exit the method after the redirect to avoid further processing
       end
-    else  # Handle existing functionality if no email is provided
+    else # Handle existing functionality if no email is provided
       subscribed_user_ids = current_user.subscriptions.where(subscribable_type: 'User').pluck(:subscribable_id)
       @transactions = fetch_enriched_transactions(subscribed_user_ids)
     end
   end
 
-
   def create
-    subscribable = determine_subscribable(params[:subscribable_type], params[:subscribable_id])
-    @subscription = Subscription.new(subscribable: subscribable, user: current_user)
+    subscribable = determine_subscribable(params[:subscription][:subscribable_type],
+                                          params[:subscription][:subscribable_id])
+    @subscription = Subscription.new(subscribable:, user: current_user)
+
+    if @subscription.save
+      flash[:notice] = 'Subscribed successfully!'
+    else
+      flash[:alert] = 'Subscription failed!'
+    end
+    respond_to do |format|
+      format.html { redirect_to community_path }
+
+      format.json  { render json: { msg: :ok } }
+    end
+  end
+
+  def subscribeticker
+    raise
+    subscribable = determine_subscribable(params[:subscription][:subscribable_type],
+                                          params[:subscription][:subscribable_id])
+    @subscription = Subscription.new(subscribable:, user: current_user)
 
     if @subscription.save
       flash[:notice] = 'Subscribed successfully!'
@@ -27,7 +45,7 @@ class SubscriptionsController < ApplicationController
       flash[:alert] = 'Subscription failed!'
     end
 
-    redirect_to community_path
+    # redirect_to community_path
   end
 
   def destroy
@@ -39,22 +57,21 @@ class SubscriptionsController < ApplicationController
       flash[:alert] = 'Unsubscription failed!'
     end
 
-    redirect_to portfolios_path
+    redirect_to community_path
   end
 
   private
 
   # Enriches transactions with current price and P/L calculations
   def fetch_enriched_transactions(subscribed_user_ids)
-    transactions = Transaction.joins(user_ticker: :user)
-                              .where(user_ticker: { user_id: subscribed_user_ids })
-                              .distinct
+    Transaction.joins(user_ticker: :user)
+               .where(user_ticker: { user_id: subscribed_user_ids })
+               .distinct
 
     # transactions.each do |transaction|
     #   transaction.current_price = transaction.fetch_current_price
     #   transaction.pl = transaction.calculate_pl
     # end
-    transactions
   end
 
   # Determines the subscribable entity based on the type

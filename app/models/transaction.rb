@@ -6,6 +6,8 @@ class Transaction < ApplicationRecord
   # Add any validations or methods specific to the Transaction model here
   validates :flow, :txndate, :txnprice, :qty, presence: true
 
+  default_scope -> { order(txndate: :desc) }
+
   def self.filtered_transactions(ticker_name)
     if ticker_name.present?
       joins(user_ticker: :ticker).where("tickers.name = ?", ticker_name)
@@ -13,7 +15,7 @@ class Transaction < ApplicationRecord
       all
     end
   end
-  
+
   def fetch_current_price
     # Implement API call or another method to fetch real-time price
     # Placeholder: Return the last known price for simplicity
