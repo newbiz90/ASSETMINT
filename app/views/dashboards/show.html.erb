@@ -15,6 +15,8 @@
       <div class="col-md-8">
         <%= render partial: 'transactions/index' %>
 
+        <h3 id="table-title">My Following</h3>
+
         <% @peers_txns.each do |txn| %>
           <%= render partial: 'transactions/user_txn', locals: { txn: txn } %>
         <% end %>
