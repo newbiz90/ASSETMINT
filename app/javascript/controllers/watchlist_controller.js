@@ -27,8 +27,8 @@ export default class extends Controller {
         body: JSON.stringify({
           "authenticity_token": token,
           "subscription": {
-            "subscription_type": "UserTicker",
-            "subscription_id": userTickerId
+            "subscribable_type": "UserTicker",
+            "subscribable_id": userTickerId
           }
         }), // Convert JSON object to string
         headers: {
@@ -44,7 +44,7 @@ export default class extends Controller {
         }
       })
       .catch(error => console.error('Error:', error));
-      
+
     } else {
       thisheart.classList.remove("fa-solid");
       thisheart.classList.add("fa-regular");
