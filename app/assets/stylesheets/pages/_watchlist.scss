@@ -1,16 +1,40 @@
+h2 {
+    color: #4B7F73; 
+}
+
 .user {
-    margin: 0px; 
+    margin-bottom: 0px;
+    color: #4B7F73; 
 }
 
 .watchlist-table {
-    border: 2px solid #000; 
-    margin: 0px; 
+    border: 2px solid #4B7F73; 
+    border-radius: 6px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    margin-bottom: 25px;
+    margin-top: 5px;
 }
 
-.watchlist-table th {
+.header {
+    display: flex; 
+    flex-direction: row;
+    width: 100%;
+    background-color: #4B7F73;
+    color: #E6FAF5; 
+}
+
+.header .column {
     width: 20%; 
 }
 
-.watchlist-table td {
+.info {
+    display: flex; 
+    flex-direction: row; 
+    background-color: #E6FAF5; 
+    align-items: center;
+}
+
+.info .column {
     width: 20%; 
+    align-items: center;
 }

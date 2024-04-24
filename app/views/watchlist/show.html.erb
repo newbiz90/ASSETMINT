@@ -1,5 +1,5 @@
 <div class="container">
-    <h3> My Ticker Watchlist </h3>
+    <h2> My Ticker Watchlist </h2>
 
     <% @tickerSubs.each do |ticker| %>
         <% tickerId = ticker.subscribable_id %>
@@ -8,31 +8,22 @@
         <% tickerOwner = uniqueUserTicker.user %>
         <% tickerTxn = Transaction.find_by(user_ticker: uniqueUserTicker)%>
         
-        <p class="user"><%= tickerOwner.email %></p>
+        <p class="user">From: <%= tickerOwner.email %></p>
         <div class="watchlist-table">
-            <table>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Flow</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <%# <% tickerTxns.each do |txn| %> 
-                    <tr>
-                        <td> <%= specificTicker.name %> </td>
-                        <td> <%= tickerTxn.flow %> </td>
-                        <td> <%= tickerTxn.txnprice %> </td>
-                        <td> <%= tickerTxn.qty %> </td>
-                        <td> <%= tickerTxn.txndate %> </td>
-                    </tr>
-                    <%# <% end %>
-                </tbody>
-            </table>
+            <div class="header">
+                <div class="column">Ticker</div>
+                <div class="column">Flow</div>
+                <div class="column">Price</div>
+                <div class="column">Quantity</div>
+                <div class="column">Date</div>
+            </div>
+            <div class="info">
+                <div class="column"> <%= specificTicker.name %> </div>
+                <div class="column"> <%= tickerTxn.flow %> </div>
+                <div class="column"> <%= tickerTxn.txnprice %> </div>
+                <div class="column"> <%= tickerTxn.qty %> </div>
+                <div class="column"> <%= tickerTxn.txndate %> </div>
+            </div>
         </div>
-        <br>
     <% end %>
 </div>  
