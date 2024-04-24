@@ -1,0 +1,20 @@
+<div class="txn-table">
+  <div class="py-2" style="padding-left: 3rem;">
+    <%= link_to txn.user.email, portfolio_path(txn.user) %>
+  </div>
+  <div class="table-header">
+    <div class="column">Flow</div>
+    <div class="column">Ticker</div>
+    <div class="column">Date</div>
+    <div class="column">Price</div>
+    <div class="column">Quantity</div>
+  </div>
+
+  <div class="transaction odd-transaction">
+    <div class="column"><%= txn.flow %></div>
+    <div class="column"><%= txn.user_ticker.ticker.name %></div>
+    <div class="column"><%= txn.txndate.strftime('%d/%m/%Y') %></div>
+    <div class="column"><%= txn.txnprice %></div>
+    <div class="column"><%= txn.qty %></div>
+  </div>
+</div>

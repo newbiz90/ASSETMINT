@@ -59,6 +59,8 @@ gem "devise"
 gem "httparty"
 gem "telegram-bot-ruby"
 
+gem 'will_paginate', '~> 4.0'
+
 group :development, :test do
   gem "dotenv-rails"
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

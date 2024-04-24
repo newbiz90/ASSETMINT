@@ -19,5 +19,5 @@ class User < ApplicationRecord
   has_many :user_tickers
   has_many :tickers, through: :user_tickers
 
-  has_many :transactions, through: :user_tickers
+  has_many :transactions
 end

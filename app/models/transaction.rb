@@ -1,7 +1,6 @@
 class Transaction < ApplicationRecord
   belongs_to :user_ticker
-
-  delegate :user, to: :user_ticker
+  belongs_to :user
 
   # Add any validations or methods specific to the Transaction model here
   validates :flow, :txndate, :txnprice, :qty, presence: true

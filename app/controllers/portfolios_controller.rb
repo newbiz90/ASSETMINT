@@ -12,9 +12,9 @@ class PortfoliosController < ApplicationController
     if params.dig(:search, :ticker_name).present?
       ticker = Ticker.find_by(name: params[:search][:ticker_name])
       filtered_user_ticker = UserTicker.where(ticker:, user: @user)
-      @usertxns = Transaction.where(user_ticker: filtered_user_ticker)
+      @usertxns = Transaction.where(user_ticker: filtered_user_ticker).paginate(page: params[:page], per_page: 5)
     else
-      @usertxns = @user.transactions
+      @usertxns = @user.transactions.paginate(page: params[:page], per_page: 5)
     end
     # Calculate hash of transactions_info to use as version
     transactions_info_hash = Digest::SHA256.hexdigest(@usertxns.map { |txn| txn.cache_key }.join(","))
