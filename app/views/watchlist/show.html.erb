@@ -1,14 +1,8 @@
 <div class="container">
     <h2> My Ticker Watchlist </h2>
 
-    <% @tickerSubs.each do |ticker| %>
-        <% tickerId = ticker.subscribable_id %>
-        <% uniqueUserTicker = UserTicker.find_by(id: tickerId) %>
-        <% specificTicker = uniqueUserTicker.ticker %>
-        <% tickerOwner = uniqueUserTicker.user %>
-        <% tickerTxn = Transaction.find_by(user_ticker: uniqueUserTicker)%>
-        
-        <p class="user">From: <%= tickerOwner.email %></p>
+    <% @transactions.each do |txn| %>
+        <p class="user">From: <%= txn.user_ticker.user.email %></p>
         <div class="watchlist-table">
             <div class="header">
                 <div class="column">Ticker</div>
@@ -18,12 +12,12 @@
                 <div class="column">Date</div>
             </div>
             <div class="info">
-                <div class="column"> <%= specificTicker.name %> </div>
-                <div class="column"> <%= tickerTxn.flow %> </div>
-                <div class="column"> <%= tickerTxn.txnprice %> </div>
-                <div class="column"> <%= tickerTxn.qty %> </div>
-                <div class="column"> <%= tickerTxn.txndate %> </div>
+                <div class="column"> <%= txn.user_ticker.ticker.name %> </div>
+                <div class="column"> <%= txn.flow %> </div>
+                <div class="column"> <%= txn.txnprice %> </div>
+                <div class="column"> <%= txn.qty %> </div>
+                <div class="column"> <%= txn.txndate %> </div>
             </div>
         </div>
     <% end %>
-</div>  
+</div>
