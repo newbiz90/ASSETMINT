@@ -1,1 +1,38 @@
-hello
+<div class="container">
+    <h3> My Ticker Watchlist </h3>
+
+    <% @tickerSubs.each do |ticker| %>
+        <% tickerId = ticker.subscribable_id %>
+        <% uniqueUserTicker = UserTicker.find_by(id: tickerId) %>
+        <% specificTicker = uniqueUserTicker.ticker %>
+        <% tickerOwner = uniqueUserTicker.user %>
+        <% tickerTxn = Transaction.find_by(user_ticker: uniqueUserTicker)%>
+        
+        <p class="user"><%= tickerOwner.email %></p>
+        <div class="watchlist-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Flow</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%# <% tickerTxns.each do |txn| %> 
+                    <tr>
+                        <td> <%= specificTicker.name %> </td>
+                        <td> <%= tickerTxn.flow %> </td>
+                        <td> <%= tickerTxn.txnprice %> </td>
+                        <td> <%= tickerTxn.qty %> </td>
+                        <td> <%= tickerTxn.txndate %> </td>
+                    </tr>
+                    <%# <% end %>
+                </tbody>
+            </table>
+        </div>
+        <br>
+    <% end %>
+</div>  

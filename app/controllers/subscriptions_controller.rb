@@ -33,31 +33,23 @@ class SubscriptionsController < ApplicationController
     end
   end
 
-  def subscribeticker
-    raise
-    subscribable = determine_subscribable(params[:subscription][:subscribable_type],
-                                          params[:subscription][:subscribable_id])
-    @subscription = Subscription.new(subscribable:, user: current_user)
-
-    if @subscription.save
-      flash[:notice] = 'Subscribed successfully!'
-    else
-      flash[:alert] = 'Subscription failed!'
-    end
-
-    # redirect_to community_path
-  end
-
   def destroy
-    subscription = current_user.subscriptions.find_by(id: params[:id])
+    # subscription = current_user.subscriptions.find_by(id: params[:id])
+    
+    allSubs = current_user.subscriptions
+    tickerWanted = allSubs.find_by(usertickers: params[:userTickerId])
 
-    if subscription.destroy
+    if tickerWanted.destroy
       flash[:notice] = 'Unsubscribed successfully!'
     else
       flash[:alert] = 'Unsubscription failed!'
     end
 
-    redirect_to community_path
+    respond_to do |format|
+      format.html { redirect_to community_path }
+
+      format.json  { render json: { msg: :ok } }
+    end
   end
 
   private
