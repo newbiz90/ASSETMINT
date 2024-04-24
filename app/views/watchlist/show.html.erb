@@ -1,7 +1,7 @@
 <div class="container">
     <h2> My Ticker Watchlist </h2>
 
-    <% @tickerSubs.each do |ticker| %>
+    <% @tickerSubscriptions.each do |ticker| %>
         <% tickerId = ticker.subscribable_id %>
         <% uniqueUserTicker = UserTicker.find_by(id: tickerId) %>
         <% specificTicker = uniqueUserTicker.ticker %>

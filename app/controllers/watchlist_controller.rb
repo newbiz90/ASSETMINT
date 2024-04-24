@@ -1,6 +1,6 @@
 class WatchlistController < ApplicationController
   def show
-    @tickerSubs = current_user.subscriptions.where(subscribable_type: "UserTicker")
+    @tickerSubscriptions = current_user.subscriptions.where(subscribable_type: "UserTicker")
   end
 
   def followtickerform
