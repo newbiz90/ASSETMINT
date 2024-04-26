@@ -1,50 +1,84 @@
-<div class="container">
-  <div class="row">
-    <div class="col-sm-3">
-      <h1 id="community-title">Community</h1>
-    </div>
-  </div>
-  <div class="txn-table">
-    <!-- Header Row -->
-    <div class="header-row row">
-      <div class="header-style email-column col-sm-3">USER</div>
-      <div class="header-style action-column col-sm-3">FOLLOW / UNFOLLOW</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Community</title>
+  <link rel="stylesheet" href="/path/to/your/css">
+</head>
+<body>
+  <div class="container">
+    <!-- Community Title -->
+    <div class="row">
+      <div class="col-sm-3">
+        <h1 id="community-title">Community</h1>
+      </div>
     </div>
 
-    <!-- Dynamic User Rows -->
-    <% row_counter = 0 %>  <!-- Initialize row_counter before the loop starts -->
-    <% @users.each do |user| %>
-      <% unless user == current_user %>
-        <% row_class = row_counter.even? ? 'even-row' : 'odd-row' %>
-        <div class="row <%= row_class %>"> <!-- Use Bootstrap's row class for each user row -->
-          <div class="email-column col-sm-3">
-            <%= link_to user.email, portfolio_path(user) %>
-          </div> <!-- Bootstrap grid class -->
-          <div class="action-column col-sm-3"> <!-- Bootstrap grid class -->
-            <% subscription = current_user.subscriptions.find { |sub| sub.subscribable_type == "User" && sub.subscribable_id == user.id } %>
-            <% if subscription %>
-              <%= form_with(model: subscription, url: subscription_path(subscription), method: :delete, local: true) do |form| %>
-                <%= form.submit "Unfollow", class: "btn btn-sm btn-danger", data: { disable_with: "Unfollowing..." } %>
-              <% end %>
-            <% else %>
-              <%= form_with(model: Subscription.new, url: subscriptions_path, method: :post, local: true) do |form| %>
-                <%= form.hidden_field :subscribable_type, value: "User" %>
-                <%= form.hidden_field :subscribable_id, value: user.id %>
-                <%= form.submit "Follow", class: "btn btn-sm btn-primary", data: { disable_with: "Following..." } %>
-              <% end %>
-            <% end %>
-          </div>
-        </div>
-        <% row_counter += 1 %>  <!-- Increment row_counter inside the loop -->
-      <% end %>
+    <!-- Search Form -->
+    <form class="simple_form mb-3" style="margin-top: 2rem;" novalidate="novalidate" action="/users/search" accept-charset="UTF-8" method="get">
+      <div class="mb-3 string required">
+        <input class="form-control string required" type="text" name="search[email]" id="search_email" placeholder="Enter user email...">
+      </div>
+      <input type="submit" name="commit" value="Search" class="btn btn-primary" data-disable-with="Searching...">
+    </form>
+
+    <!-- Search Results -->
+    <% if defined?(@search_performed) && @search_performed %> <!-- Only show results if a search was performed -->
+      <div class="search-results">
+        <% if @users.any? %>
+          <% @users.each do |user| %>
+            <div class="email-item"><%= user.email %></div>
+          <% end %>
+        <% else %>
+          <div>No user found.</div>
+        <% end %>
+      </div>
     <% end %>
-  </div>
-</div>
 
-<div class="mt-4 row">
-  <div class="col-sm-2">
-    <div id="followed-user-count">
-      <h6>Followed Users Count: <%= current_user.subscriptions.length %></h6>
+    <!-- User Table -->
+    <div class="txn-table">
+      <!-- Header Row -->
+      <div class="header-row row">
+        <div class="header-style email-column col-sm-3">USER</div>
+        <div class="header-style action-column col-sm-3">FOLLOW / UNFOLLOW</div>
+      </div>
+      <!-- Dynamic User Rows -->
+      <% row_counter = 0 %>
+      <% @users.each do |user| %>
+        <% unless user == current_user %>
+          <% row_class = row_counter.even? ? 'even-row' : 'odd-row' %>
+          <div class="row <%= row_class %>">
+            <div class="email-column col-sm-3">
+              <%= link_to user.email, portfolio_path(user) %>
+            </div>
+            <div class="action-column col-sm-3">
+              <% subscription = current_user.subscriptions.find { |sub| sub.subscribable_type == "User" && sub.subscribable_id == user.id } %>
+              <% if subscription %>
+                <%= form_with(model: subscription, url: subscription_path(subscription), method: :delete, local: true) do |form| %>
+                  <%= form.submit "Unfollow", class: "btn btn-sm btn-danger", data: { disable_with: "Unfollowing..." } %>
+                <% end %>
+              <% else %>
+                <%= form_with(model: Subscription.new, url: subscriptions_path, method: :post, local: true) do |form| %>
+                  <%= form.hidden_field :subscribable_type, value: "User" %>
+                  <%= form.hidden_field :subscribable_id, value: user.id %>
+                  <%= form.submit "Follow", class: "btn btn-sm btn-primary", data: { disable_with: "Following..." } %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+          <% row_counter += 1 %>
+        <% end %>
+      <% end %>
     </div>
-  </div>
-</div>
+
+    <!-- Followed Users Count -->
+    <div class="mt-4 row">
+      <div class="col-sm-2">
+        <div id="followed-user-count">
+          <h6>Followed Users Count: <%= current_user.subscriptions.length if defined?(current_user) && current_user %></h6>
+        </div>
+      </div>
+    </div>
+  </div> <!-- Ensure all container divs are properly closed -->
+</body>
+</html>

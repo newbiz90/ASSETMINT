@@ -13,7 +13,7 @@
 @import "pages/transactions";
 @import "components/container";
 @import "components/table";
-@import "pages/watchlist"; 
+@import "pages/watchlist";
 
 
 h3 {
@@ -61,4 +61,13 @@ h3 {
 /* Body styles */
 body {
   background-color: #fdfdfd; /* Set the background color of the body */
+}
+
+.search-results {
+  margin-top: 20px;
+  margin-bottom: 50px; /* Space before the table starts */
+}
+
+.search-results .email-item {
+  margin-bottom: 20px; /* Space between emails */
 }

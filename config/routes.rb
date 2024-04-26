@@ -50,4 +50,6 @@ Rails.application.routes.draw do
   # For logged-in user to view other user portfolios
   get 'users/:id', to: 'portfolios#show'
 
+  # For community page search field
+  get '/users/search', to: 'users#search'
 end
