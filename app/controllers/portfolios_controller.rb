@@ -20,9 +20,9 @@ class PortfoliosController < ApplicationController
     transactions_info_hash = Digest::SHA256.hexdigest(@usertxns.map { |txn| txn.cache_key }.join(","))
 
     # Fetch or generate summary from cache
-    # @summary = Rails.cache.fetch("portfolio_summary_#{params[:id]}_#{transactions_info_hash}", expires_in: 24.hour) do
-    #   generate_summary
-    # end
+    @summary = Rails.cache.fetch("portfolio_summary_#{params[:id]}_#{transactions_info_hash}", expires_in: 24.hour) do
+      generate_summary
+    end
   end
 
   def me
