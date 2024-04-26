@@ -31,20 +31,20 @@ class PortfoliosController < ApplicationController
 
   private
 
-  # def generate_summary
-  #   # Extracting relevant information from @usertxns
-  #   transactions_info = @usertxns.map do |txn|
-  #     ticker_symbol = txn.user_ticker.ticker.name
-  #     "#{txn.flow} transaction for #{ticker_symbol} at $#{txn.txnprice} per share"
-  #   end
+  def generate_summary
+    # Extracting relevant information from @usertxns
+    transactions_info = @usertxns.map do |txn|
+      ticker_symbol = txn.user_ticker.ticker.name
+      "#{txn.flow} transaction for #{ticker_symbol} at $#{txn.txnprice} per share"
+    end
 
-  #   # Formatting the prompt
-  #   prompt = "Here are the recent transactions:\n#{transactions_info.join("\n")}\n\nPlease give some insights to the transactions."
+    # Formatting the prompt
+    prompt = "Here are the recent transactions:\n#{transactions_info.join("\n")}\n\nPlease give some insights to the transactions."
 
-  #   # Calling OpenAI service to generate a summary
-  #   summary_response = OpenaiApiClient.create_chat(prompt)
+    # Calling OpenAI service to generate a summary
+    summary_response = OpenaiApiClient.create_chat(prompt)
 
-  #   # Extracting the summary from the response
-  #   summary_response["choices"].first["message"]["content"]
-  # end
+    # Extracting the summary from the response
+    summary_response["choices"].first["message"]["content"]
+  end
 end
