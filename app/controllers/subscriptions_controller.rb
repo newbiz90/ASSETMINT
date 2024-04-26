@@ -31,7 +31,10 @@ class SubscriptionsController < ApplicationController
         redirect_to community_path
       end
 
-      format.json  { render json: { msg: :ok } }
+      format.json  do 
+        @subscription.save
+        render json: { msg: :ok } 
+      end
     end
   end
 
