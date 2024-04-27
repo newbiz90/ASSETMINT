@@ -7,6 +7,13 @@
 <div class="container">
   <h3 id="table-title">All User<%=params[:id]%>'s Transactions</h3>
 
+  <h2>
+    Materialised Gains: $<%= @actual_gain %>
+  </h2>
+  <h3>
+    Including Unsold: $<%= @current_profit %>
+  </h3>
+
   <div class="shadow-container mb-4 p-4" style="border-color: green; margin-top: 2rem;">
     <p>
       <i class="fas fa-lightbulb" style="margin-right: 0.5rem;"></i> Summary of User<%= params[:id] %>

@@ -28,12 +28,14 @@ class SubscriptionsController < ApplicationController
         else
           flash[:alert] = 'Subscription failed!'
         end
+
         redirect_to community_path
       end
 
-      format.json  do 
+      format.json do
         @subscription.save
-        render json: { msg: :ok } 
+
+        render json: { msg: :ok }
       end
     end
   end

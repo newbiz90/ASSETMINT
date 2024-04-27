@@ -7,6 +7,8 @@ class Transaction < ApplicationRecord
 
   default_scope -> { order(txndate: :desc) }
 
+  before_save :set_txnamt
+
   def self.filtered_transactions(ticker_name)
     if ticker_name.present?
       joins(user_ticker: :ticker).where("tickers.name = ?", ticker_name)
@@ -24,5 +26,11 @@ class Transaction < ApplicationRecord
   def calculate_pl
     # Simple P/L calculation: (current price - entry price) * quantity
     (fetch_current_price - txnprice) * qty
+  end
+
+  private
+
+  def set_txnamt
+    self.txnamt = txnprice * qty
   end
 end
